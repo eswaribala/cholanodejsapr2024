@@ -24,7 +24,8 @@ Schema({
       message: props => `${props.value} is not a valid phone number!`
    },
       required:true
-   }
+   },
+   roles:[{type:Schema.Types.ObjectId,required:true,ref:'Role'}]
 })
 
 module.exports = mongoose.model("User",userSchema)
