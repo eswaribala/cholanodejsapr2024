@@ -1,5 +1,5 @@
 const user=require('../models/user');
-const validationResult=require('express-validator')
+const {validationResult}=require('express-validator')
 const config=require('config')
 //fetch all users
 exports.fetchAllUsers=async (req,res)=>{
@@ -15,10 +15,12 @@ exports.saveUser=async (req,res)=>{
   const errors=validationResult(req);
   if(!errors.isEmpty()){
       return res.
-      status(config.get('statuscode.badRequest')).json({
+      status(config.get('statusCode.badRequest')).json({
           errors:errors.array()
       })
   }
+
+
 
 
 }
