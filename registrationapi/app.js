@@ -1,7 +1,7 @@
 const express=require('express')
 const mongoose=require('mongoose')
-const config = require('./config')
-const appRoute=require('./routes')
+const config = require('config')
+const appRoute=require('./routes/approutes')
 //express instance
 const app=express();
 //format

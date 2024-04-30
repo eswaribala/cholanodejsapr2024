@@ -1,5 +1,5 @@
 const {validationResult} = require("express-validator");
-const config=require('../config')
+const config=require('config')
 const role=require('../models/role')
 //saving the role using post
 exports.saveRole=async (req,res)=>{
