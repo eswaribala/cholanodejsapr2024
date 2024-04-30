@@ -30,7 +30,7 @@ exports.saveUser=async (req,res)=>{
     })
     //promise resolved --> then
     //promise rejected --> catch
-    userInstance.save().then(result=>{
+    await userInstance.save().then(result=>{
         return res.
         status(config.get('statusCode.created')).json({
             message:`user instance successfully created ${result}`
