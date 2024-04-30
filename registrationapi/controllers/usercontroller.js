@@ -2,8 +2,14 @@ const user=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
 //fetch all users
-exports.fetchAllUsers=async (req,res)=>{
-
+exports.fetchAllUsers=(req,res)=>{
+    user.find().then(data=>{
+     res.send(JSON.stringify(data, (_, v) => typeof v === 'bigint' ? v.toString() : v))
+    }).catch(error=>{
+       res.send({
+           errorMessage: error.message
+       })
+    })
 }
 //fetch by Id
 exports.fetchUserById=async (req,res)=>{
