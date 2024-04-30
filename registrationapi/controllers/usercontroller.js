@@ -4,9 +4,13 @@ const config=require('config')
 //fetch all users
 exports.fetchAllUsers=(req,res)=>{
     user.find().then(data=>{
-     res.send(JSON.stringify(data, (_, v) => typeof v === 'bigint' ? v.toString() : v))
+     res.status(config.get('statusCode.success')).send({
+         message:'users information ready to consume',
+         users:JSON.stringify(data,
+         (_, v) => typeof v === 'bigint' ? v.toString() : v)})
     }).catch(error=>{
-       res.send({
+       res.status(config.get('statusCode.logicError')).send({
+           message:'users information not found',
            errorMessage: error.message
        })
     })
