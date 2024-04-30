@@ -20,6 +20,29 @@ exports.saveUser=async (req,res)=>{
       })
   }
 
+  const userInstance=new user({
+      firstName:req.body.firstName,
+      lastName:req.body.lastName,
+      dob:req.body.dob,
+      gender:req.body.gender,
+      mobileNo:req.body.mobileNo
+
+    })
+    //promise resolved --> then
+    //promise rejected --> catch
+    userInstance.save().then(result=>{
+        return res.
+        status(config.get('statusCode.created')).json({
+            message:`user instance successfully created ${result}`
+        })
+
+    }).catch(err=>{
+        return res.
+        status(config.get('statusCode.logicError')).json({
+            error: `User Could Not be Saves ${err}`
+        })
+    })
+
 
 
 
