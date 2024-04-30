@@ -2,18 +2,34 @@ const user=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
 //fetch all users
-exports.fetchAllUsers=(req,res)=>{
-    user.find().then(data=>{
-     res.status(config.get('statusCode.success')).send({
-         message:'users information ready to consume',
-         users:JSON.stringify(data,
-         (_, v) => typeof v === 'bigint' ? v.toString() : v)})
-    }).catch(error=>{
-       res.status(config.get('statusCode.logicError')).send({
-           message:'users information not found',
-           errorMessage: error.message
-       })
+exports.fetchAllUsers=(req,res,nxt)=>{
+    user.find().countDocuments().then(count=>{
+        console.log(count);
+        let perPage=req.query.pages;
+        console.log(perPage);
+        user.find()
+            .limit(perPage)
+            .then(data=>{
+            //console.log(typeof (data[0].mobileNo))
+
+            res.status(config.get('statusCode.success')).send({
+                message:'users information ready to consume',
+                users:JSON.stringify(data,
+                    (_, v) => typeof v === 'bigint' ? v.toString() : v)})
+        }).catch(error=>{
+            res.status(config.get('statusCode.logicError')).send({
+                message:'users information not found',
+                errorMessage: error.message
+            })
+            nxt()
+        })
+
+    }).catch(err=>{
+        console.log(err);
+        nxt()
     })
+
+
 }
 //fetch by Id
 exports.fetchUserById=async (req,res)=>{

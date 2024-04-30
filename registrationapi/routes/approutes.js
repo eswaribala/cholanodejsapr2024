@@ -76,7 +76,18 @@ router.post('/users/v1.0/', userController.saveUser)
  *        description: role added successfully.
  */
 router.post('/roles/v1.0/',roleController.saveRole)
-
+/**
+ * @swagger
+ * /api/users/v1.0/:
+ *  get:
+ *    description: Use to add user in DB
+ *    produces:
+ *      - application/json
+ *
+ *    responses:
+ *      '200':
+ *        description: Users fetched successfully.
+ */
 router.get('/users/v1.0/',userController.fetchAllUsers)
 
 module.exports = router
