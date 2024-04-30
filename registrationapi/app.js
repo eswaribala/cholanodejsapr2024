@@ -6,6 +6,12 @@ const appRoute=require('./routes/approutes')
 const app=express();
 //format
 app.use(express.json())
+
+// Swagger
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const SwaggerOptions = require('./docs/swagger.json');
+const swaggerDocument = swaggerJsDoc(SwaggerOptions);
 //cors
 app.use((req,res,next)=>{
     res.setHeader("Access-Control-Allow-Origin",'*');
@@ -15,6 +21,7 @@ app.use((req,res,next)=>{
 })
 
 app.use('/api', appRoute);
+app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 mongoose.connect(config.get('mongodb.url').toString()
 ).then(result =>{
