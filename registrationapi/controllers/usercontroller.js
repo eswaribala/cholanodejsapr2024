@@ -25,8 +25,8 @@ exports.saveUser=async (req,res)=>{
       lastName:req.body.lastName,
       dob:req.body.dob,
       gender:req.body.gender,
-      mobileNo:req.body.mobileNo
-
+      mobileNo:req.body.mobileNo,
+      roles:[req.body.roles]
     })
     //promise resolved --> then
     //promise rejected --> catch
