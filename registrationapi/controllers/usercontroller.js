@@ -1,10 +1,10 @@
 const db=require('../dbconfiguration/dbconn')
-const userSchema=require('../models/user');
+const user=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
 //fetch all users
-exports.fetchAllUsers=(req,res)=>{
-    user.find().countDocuments().then(count=>{
+exports.fetchAllUsers=async (req,res)=>{
+   await  user.find().countDocuments().then(count=>{
         console.log(count);
         let pages=req.query.pages;
         let limit=req.query.limit;
