@@ -12,14 +12,15 @@ exports.fetchAllRoles=(req,res)=>{
                     message: 'roles information ready to consume',
                     users: data
 
-                })
-            })
-            .catch(error => {
+                }).catch(error => {
                     res.status(config.get('statusCode.logicError')).send({
                         message: 'roles information not found',
                         errorMessage: error.message
                     })
+
                 })
+            })
+
 
 }
 

@@ -1,4 +1,5 @@
-const user=require('../models/user');
+const db=require('../dbconfiguration/dbconn')
+const userSchema=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
 //fetch all users
