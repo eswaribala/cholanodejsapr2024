@@ -104,5 +104,29 @@ router.post('/roles/v1.0/',roleController.saveRole)
  *        description: Users fetched successfully.
  */
 router.get('/users/v1.0/',userController.fetchAllUsers)
+/**
+ * @swagger
+ * /api/users/v1.0/{mobileNo}:
+ *  get:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: mobileNo
+ *        description: find Mobile No  from DB.
+ *        schema:
+ *          type: integer
+ *          required:
+ *            - mobileNo
+ *          properties:
+ *            mobileNo:
+ *              type: integer
+ *    responses:
+ *      '200':
+ *        description: Users fetched successfully.
+ */
+
+router.get('/users/v1.0/:mobileNo',userController.fetchUserByMobileNo)
 
 module.exports = router

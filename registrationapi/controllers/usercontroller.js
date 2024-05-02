@@ -39,6 +39,7 @@ exports.fetchAllUsers=(req,res)=>{
 //fetch by Id
 exports.fetchUserByMobileNo=async (req,res)=>{
     //unique data query
+    console.log(req.params.status)
     await user.findOne({mobileNo:req.params.mobileNo})
         .then(data=>{
 
