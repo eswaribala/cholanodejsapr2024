@@ -5,8 +5,10 @@ const config=require('config')
 const mongoose=require('mongoose')
 const { startSession } = require('mongoose')
 const redis=require('redis')
+const nodeCache=require('node-cache')
+const NodeCache = require("node-cache");
 const redisConn= redis.createClient({url:config.get('redis.url')});
-
+const nodeCacheClient=new NodeCache();
 (async ()=>{
     redisConn.on('error', (err) => {
         console.log('Redis Client Error', err);
@@ -22,7 +24,8 @@ const redisConn= redis.createClient({url:config.get('redis.url')});
 exports.fetchAllUsers=async (req,res)=>{
     let pages = req.query.pages;
     let limit = req.query.limit;
-const value=await redisConn.get("users");
+//const value=await redisConn.get("users");
+    const value=await nodeCacheClient.get("users")
 if(value){
     res.send({
         "message":"cache hit success",
@@ -40,8 +43,11 @@ if(value){
             .then(data => {
                 //console.log(typeof (data[0].mobileNo))
                 //save it in redis cache
-                redisConn.setEx("users", 3000, JSON.stringify(data,
-                    (_, v) => typeof v === 'bigint' ? v.toString() : v))
+               // redisConn.setEx("users", 3000, JSON.stringify(data,
+                 //   (_, v) => typeof v === 'bigint' ? v.toString() : v))
+
+                nodeCacheClient.set("users",JSON.stringify(data,
+                       (_, v) => typeof v === 'bigint' ? v.toString() : v),3000);
                 res.status(config.get('statusCode.success')).send({
                     message: 'users information ready to consume',
                     totalPages: count,
