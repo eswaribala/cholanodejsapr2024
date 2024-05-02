@@ -1,6 +1,29 @@
 const {validationResult} = require("express-validator");
 const config=require('config')
 const role=require('../models/role')
+
+
+exports.fetchAllRoles=(req,res)=>{
+       role.find()
+            .then(data=> {
+                //console.log(typeof (data[0].mobileNo))
+
+                res.status(config.get('statusCode.success')).send({
+                    message: 'roles information ready to consume',
+                    users: data
+
+                })
+            })
+            .catch(error => {
+                    res.status(config.get('statusCode.logicError')).send({
+                        message: 'roles information not found',
+                        errorMessage: error.message
+                    })
+                })
+
+}
+
+
 //saving the role using post
 exports.saveRole=async (req,res)=>{
   //validating json data

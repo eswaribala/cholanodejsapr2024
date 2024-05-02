@@ -78,6 +78,19 @@ router.post('/users/v1.0/', userController.saveUser)
 router.post('/roles/v1.0/',roleController.saveRole)
 /**
  * @swagger
+ * /api/roles/v1.0/:
+ *  get:
+ *    description: Use to find roles in DB
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      '200':
+ *        description: Roles fetched successfully.
+ */
+router.get('/roles/v1.0/',roleController.fetchAllRoles)
+
+/**
+ * @swagger
  * /api/users/v1.0/:
  *  get:
  *    description: Use to add user in DB
@@ -128,5 +141,50 @@ router.get('/users/v1.0/',userController.fetchAllUsers)
  */
 
 router.get('/users/v1.0/:mobileNo',userController.fetchUserByMobileNo)
-
+/**
+ * @swagger
+ * /api/users/fname/v1.0/{firstName}:
+ *  get:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: firstName
+ *        description: find Mobile No  from DB.
+ *        schema:
+ *          type: string
+ *          required:
+ *            - firstName
+ *          properties:
+ *            firstName:
+ *              type: string
+ *    responses:
+ *      '200':
+ *        description: Users fetched successfully.
+ */
+router.get('/users/fname/v1.0/:firstName',userController.fetchUserByFirstName)
+/**
+ * @swagger
+ * /api/users/lname/v1.0/{lastName}:
+ *  get:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: lastName
+ *        description: find Mobile No  from DB.
+ *        schema:
+ *          type: string
+ *          required:
+ *            - lastName
+ *          properties:
+ *            lastName:
+ *              type: string
+ *    responses:
+ *      '200':
+ *        description: Users fetched successfully.
+ */
+router.get('/users/lname/v1.0/:lastName',userController.fetchUserByLastName)
 module.exports = router
