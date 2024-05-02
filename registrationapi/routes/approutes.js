@@ -187,4 +187,48 @@ router.get('/users/fname/v1.0/:firstName',userController.fetchUserByFirstName)
  *        description: Users fetched successfully.
  */
 router.get('/users/lname/v1.0/:lastName',userController.fetchUserByLastName)
+/**
+ * @swagger
+ * /api/users/v1.0/{mobileNo}:
+ *  put:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: mobileNo
+ *        description: find Mobile No  from DB.
+ *        schema:
+ *          type: integer
+ *          required:
+ *            - mobileNo
+ *          properties:
+ *            mobileNo:
+ *              type: integer
+ *      - in: body
+ *        name: Add user
+ *        description: Update user in DB.
+ *        schema:
+ *          type: object
+ *          required:
+ *            - roles
+ *            - mobileNo
+ *
+ *          properties:
+ *            roles:
+ *              type: array
+ *              items:
+ *                  type: string
+ *
+ *            mobileNo :
+ *              type: integer
+ *              example: 9952032862
+ *
+ *    responses:
+ *      '200':
+ *        description: Users fetched successfully.
+ */
+
+
+router.put('/users/v1.0/:mobileNo',userController.updateUser)
 module.exports = router
