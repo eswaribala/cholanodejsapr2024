@@ -135,6 +135,21 @@ exports.saveUser=async (req,res)=>{
 
 //update User
 exports.updateUser=async (req,res)=>{
+ const filter={mobileNo:req.params.mobileNo}
+ const update={mobileNo:req.body.mobileNo,roles:[req.body.roles]}
+ await user.findOneAndUpdate(filter,update,{new:true}).then(result=> {
+     res.status(config.get('statusCode.success')).send({
+         message: `user details updated for the mobileNo ${req.params.mobileNo}`,
+         user: JSON.parse(JSON.stringify(result,
+             (_, v) => typeof v === 'bigint' ? v.toString() : v))
+     })
+
+ }).catch(error=> {
+     res.status(config.get('statusCode.logicError')).send({
+         message: `user details not updated for the mobileNo ${req.params.mobileNo}`,
+         error: error.message
+     })
+ })
 
 }
 
