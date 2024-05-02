@@ -1,10 +1,10 @@
 const {validationResult} = require("express-validator");
 const config=require('config')
 const role=require('../models/role')
+const db=require('../dbconfiguration/dbconn')
 
-
-exports.fetchAllRoles=(req,res)=>{
-       role.find()
+exports.fetchAllRoles=async (req,res)=>{
+       await role.find()
             .then(data=> {
                 //console.log(typeof (data[0].mobileNo))
 
@@ -12,14 +12,15 @@ exports.fetchAllRoles=(req,res)=>{
                     message: 'roles information ready to consume',
                     users: data
 
-                }).catch(error => {
+                })
+            }).catch(error => {
                     res.status(config.get('statusCode.logicError')).send({
                         message: 'roles information not found',
                         errorMessage: error.message
                     })
 
                 })
-            })
+
 
 
 }

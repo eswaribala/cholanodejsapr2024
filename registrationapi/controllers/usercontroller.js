@@ -2,8 +2,14 @@ const db=require('../dbconfiguration/dbconn')
 const user=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
+const mongoose=require('mongoose')
+const { startSession } = require('mongoose')
+
+
 //fetch all users
 exports.fetchAllUsers=async (req,res)=>{
+
+
    await  user.find().countDocuments().then(count=>{
         console.log(count);
         let pages=req.query.pages;
@@ -117,12 +123,14 @@ exports.saveUser=async (req,res)=>{
     //promise resolved --> then
     //promise rejected --> catch
     await userInstance.save().then(result=>{
+
         return res.
         status(config.get('statusCode.created')).json({
             message:`user instance successfully created ${result}`
         })
 
     }).catch(err=>{
+
         return res.
         status(config.get('statusCode.logicError')).json({
             error: `User Could Not be Saves ${err}`
