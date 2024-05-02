@@ -16,6 +16,7 @@ Schema({
       required:true},
    mobileNo:{
       type:BigInt,
+      unique:true,
    validate: {
       validator: function(v) {
          return /\d{10}/.test(v);

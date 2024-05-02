@@ -37,7 +37,22 @@ exports.fetchAllUsers=(req,res)=>{
 
 }
 //fetch by Id
-exports.fetchUserById=async (req,res)=>{
+exports.fetchUserByMobileNo=async (req,res)=>{
+    //unique data query
+    await user.findOne({mobileNo:req.params.mobileNo})
+        .then(data=>{
+
+          res.status(config.get('statusCode.success')).send({
+                message:'user found for the given mobileNo',
+                user:JSON.parse(JSON.stringify(data,
+                    (_, v) => typeof v === 'bigint' ? v.toString() : v))})
+        }).catch(error=>{
+        res.status(config.get('statusCode.logicError')).send({
+            message:`user could not be found for the given mobileNo ${req.params.mobileNo}`,
+            errorMessage: error.message
+        })
+
+    })
 
 }
 
