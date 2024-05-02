@@ -20,6 +20,8 @@ const redisConn= redis.createClient({url:config.get('redis.url')});
 
 //fetch all users
 exports.fetchAllUsers=async (req,res)=>{
+    let pages = req.query.pages;
+    let limit = req.query.limit;
 const value=redisConn.get("users");
 if(value){
     res.send({
@@ -30,8 +32,7 @@ if(value){
 
     await user.find().countDocuments().then(count => {
         console.log(count);
-        let pages = req.query.pages;
-        let limit = req.query.limit;
+
         console.log(pages);
         user.find()
             .skip(pages)
