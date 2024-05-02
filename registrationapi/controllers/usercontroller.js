@@ -157,4 +157,18 @@ exports.updateUser=async (req,res)=>{
 
 exports.deleteUser=async (req,res)=>{
 
+    await user.deleteOne({mobileNo: req.params.mobileNo}).then(result=> {
+        res.status(config.get('statusCode.success')).send({
+            message: `user deleted for the mobileNo ${req.params.mobileNo}`,
+            status: result
+        })
+
+    }).catch(error=> {
+        res.status(config.get('statusCode.logicError')).send({
+            message: `user not deleted for the mobileNo ${req.params.mobileNo}`,
+            error: error.message
+        })
+    })
+
+
 }

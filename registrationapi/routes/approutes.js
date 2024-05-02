@@ -231,4 +231,28 @@ router.get('/users/lname/v1.0/:lastName',userController.fetchUserByLastName)
 
 
 router.put('/users/v1.0/:mobileNo',userController.updateUser)
+/**
+ * @swagger
+ * /api/users/v1.0/{mobileNo}:
+ *  delete:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: mobileNo
+ *        description: delete user by Mobile No  from DB.
+ *        schema:
+ *          type: integer
+ *          required:
+ *            - mobileNo
+ *          properties:
+ *            mobileNo:
+ *              type: integer
+ *    responses:
+ *      '200':
+ *        description: Users deleted successfully.
+ */
+
+router.delete('/users/v1.0/:mobileNo',userController.deleteUser)
 module.exports = router
