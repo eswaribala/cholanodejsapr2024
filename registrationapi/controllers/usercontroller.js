@@ -4,7 +4,19 @@ const {validationResult}=require('express-validator')
 const config=require('config')
 const mongoose=require('mongoose')
 const { startSession } = require('mongoose')
+const redis=require('redis')
+const redisConn= redis.createClient(config.get('redis.host'),config.get('redis.port'));
 
+(async ()=>{
+    redisConn.on('error', (err) => {
+        console.log('Redis Client Error', err);
+    });
+    redisConn.on('ready', () => console.log('Redis is ready'));
+
+    await redisConn.connect();
+
+    await redisConn.ping();
+})();
 
 //fetch all users
 exports.fetchAllUsers=async (req,res)=>{
