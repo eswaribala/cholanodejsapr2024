@@ -2,31 +2,36 @@ const user=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
 //fetch all users
-exports.fetchAllUsers=(req,res,nxt)=>{
+exports.fetchAllUsers=(req,res)=>{
     user.find().countDocuments().then(count=>{
         console.log(count);
-        let perPage=req.query.pages;
-        console.log(perPage);
+        let pages=req.query.pages;
+        let limit=req.query.limit;
+        console.log(pages);
         user.find()
-            .limit(perPage)
+            .skip(pages)
+            .limit(limit)
             .then(data=>{
             //console.log(typeof (data[0].mobileNo))
 
             res.status(config.get('statusCode.success')).send({
                 message:'users information ready to consume',
-                users:JSON.stringify(data,
-                    (_, v) => typeof v === 'bigint' ? v.toString() : v)})
+                totalPages:count,
+                skipPages:pages,
+                limit:limit,
+                users:JSON.parse(JSON.stringify(data,
+                    (_, v) => typeof v === 'bigint' ? v.toString() : v))})
         }).catch(error=>{
             res.status(config.get('statusCode.logicError')).send({
                 message:'users information not found',
                 errorMessage: error.message
             })
-            nxt()
+
         })
 
     }).catch(err=>{
         console.log(err);
-        nxt()
+
     })
 
 
