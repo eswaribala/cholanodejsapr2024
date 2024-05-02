@@ -5,3 +5,8 @@ sudo apt-get install -y docker.io
   docker -v
 
 sudo usermod -aG docker $USER
+
+#redis
+
+docker run --name=noderedis -p 6379:6379 -d redis
+
