@@ -83,7 +83,22 @@ router.post('/roles/v1.0/',roleController.saveRole)
  *    description: Use to add user in DB
  *    produces:
  *      - application/json
- *
+ *    parameters:
+ *         - in: query
+ *           name: pages
+ *           type: integer
+ *           required: false
+ *           default: 0
+ *           minimum: 0
+ *           description: The number of items to skip before starting to collect the result set.
+ *         - in: query
+ *           name: limit
+ *           type: integer
+ *           required: false
+ *           default: 20
+ *           minimum: 1
+ *           maximum: 100
+ *           description: The numbers of items to return.
  *    responses:
  *      '200':
  *        description: Users fetched successfully.
