@@ -24,7 +24,7 @@ const value=redisConn.get("users");
 if(value){
     res.send({
         "message":"cache hit success",
-        "users":(await value).slice(pages,limit)
+        "users":await JSON.parse(value).slice(pages,limit)
     })
 }else {
 
