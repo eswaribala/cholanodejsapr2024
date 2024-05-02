@@ -1,7 +1,8 @@
 {
   "redis": {
     "host": "18.234.253.37",
-    "port": 6379
+    "port": 6379,
+    "url": "redis://18.234.253.37:6379"
   },
   "mongodb": {
     "url": "mongodb://localhost:27017/userdb"

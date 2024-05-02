@@ -5,7 +5,7 @@ const config=require('config')
 const mongoose=require('mongoose')
 const { startSession } = require('mongoose')
 const redis=require('redis')
-const redisConn= redis.createClient(config.get('redis.host'),config.get('redis.port'));
+const redisConn= redis.createClient({url:config.get('redis.url')});
 
 (async ()=>{
     redisConn.on('error', (err) => {
@@ -20,40 +20,49 @@ const redisConn= redis.createClient(config.get('redis.host'),config.get('redis.p
 
 //fetch all users
 exports.fetchAllUsers=async (req,res)=>{
+const value=redisConn.get("users");
+if(value){
+    res.send({
+        "message":"cache hit success",
+        "users":(await value).slice(pages,limit)
+    })
+}else {
 
-
-   await  user.find().countDocuments().then(count=>{
+    await user.find().countDocuments().then(count => {
         console.log(count);
-        let pages=req.query.pages;
-        let limit=req.query.limit;
+        let pages = req.query.pages;
+        let limit = req.query.limit;
         console.log(pages);
         user.find()
             .skip(pages)
             .limit(limit)
-            .then(data=>{
-            //console.log(typeof (data[0].mobileNo))
-
-            res.status(config.get('statusCode.success')).send({
-                message:'users information ready to consume',
-                totalPages:count,
-                skipPages:pages,
-                limit:limit,
-                users:JSON.parse(JSON.stringify(data,
-                    (_, v) => typeof v === 'bigint' ? v.toString() : v))})
-        }).catch(error=>{
+            .then(data => {
+                //console.log(typeof (data[0].mobileNo))
+                //save it in redis cache
+                redisConn.setEx("users", 3000, JSON.stringify(data,
+                    (_, v) => typeof v === 'bigint' ? v.toString() : v))
+                res.status(config.get('statusCode.success')).send({
+                    message: 'users information ready to consume',
+                    totalPages: count,
+                    skipPages: pages,
+                    limit: limit,
+                    users: JSON.parse(JSON.stringify(data,
+                        (_, v) => typeof v === 'bigint' ? v.toString() : v))
+                })
+            }).catch(error => {
             res.status(config.get('statusCode.logicError')).send({
-                message:'users information not found',
+                message: 'users information not found',
                 errorMessage: error.message
             })
 
         })
 
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err);
 
     })
 
-
+}
 }
 //fetch by Id
 exports.fetchUserByMobileNo=async (req,res)=>{
