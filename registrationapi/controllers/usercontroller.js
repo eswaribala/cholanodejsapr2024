@@ -22,11 +22,11 @@ const redisConn= redis.createClient({url:config.get('redis.url')});
 exports.fetchAllUsers=async (req,res)=>{
     let pages = req.query.pages;
     let limit = req.query.limit;
-const value=redisConn.get("users");
+const value=await redisConn.get("users");
 if(value){
     res.send({
         "message":"cache hit success",
-        "users":await JSON.parse(value).slice(pages,limit)
+        "users": JSON.parse(value).slice(pages,limit)
     })
 }else {
 
