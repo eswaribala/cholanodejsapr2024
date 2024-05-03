@@ -26,9 +26,9 @@ app.use((req,res,next)=>{
     res.setHeader("Access-Control-Allow-Headers",'Content-Type,Authorization');
     next();
 })
-if(process.env.ENVIRONMENT==='PRODUCTION')
+//if(process.env.ENVIRONMENT==='PRODUCTION')
  app.use('/api', appRoute);
-else
+//else
  app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 //graphql

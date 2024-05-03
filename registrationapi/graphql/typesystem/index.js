@@ -6,6 +6,20 @@ type Query{
   userByMobileNo(mobileNo: ID):User
 }
 
+type Mutation{
+   addUser(userInput:UserInput): User
+}
+
+input UserInput{
+  firstName:String,
+   lastName:String,
+   dob:String,
+   mobileNo:String,
+   gender:String,
+   roles:[String]  
+
+}
+
 type User{
    firstName:String,
    lastName:String,

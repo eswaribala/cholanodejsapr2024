@@ -7,15 +7,29 @@ const root={
         return JSON.parse(JSON.stringify(users,
             (_, v) => typeof v === 'bigint' ? v.toString() : v));
     },
+    userByMobileNo:async(object)=>{
 
-    userByMobileNo:async (obj) => {
-        console.log(obj.mobileNo);
-
-        let userInstance = await user.findOne({mobileNo:obj.mobileNo})
-
+        let userInstance= await user
+            .findOne({mobileNo:object.mobileNo})
+        return JSON.parse(JSON.stringify(userInstance,
+            (_, v) => typeof v === 'bigint' ? v.toString() : v));
+    },
+    addUser:async ({userInput})=>{
+        console.log(userInput);
+        const newUser=new user({
+            firstName:userInput.firstName,
+            lastName:userInput.lastName,
+            dob:userInput.dob,
+            gender:userInput.gender,
+            mobileNo:userInput.mobileNo,
+            roles:userInput.roles
+        })
+        let userInstance=await user.create(newUser);
         return userInstance;
 
     }
+
+
 
 }
 
