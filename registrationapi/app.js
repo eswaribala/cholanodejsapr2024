@@ -4,7 +4,11 @@ const config = require('config')
 const appRoute=require('./routes/approutes')
 const conn=require('./dbconfiguration/dbconn')
 const dotenv=require('dotenv')
-console.log(`Log Level ${process.env.LOG_LEVEL}`)
+console.log(`Log Level ${process.env}`)
+for (let envKey in process.env) {
+    console.log(envKey)
+}
+
 //express instance
 const app=express();
 //format
