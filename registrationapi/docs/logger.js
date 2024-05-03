@@ -7,7 +7,7 @@ const { format, level, prettyPrint } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 const timezoned = () => {
     return new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Mumbai'
+        timeZone: 'Europe/Istanbul'
     });
 }
 const logger = winston.createLogger({

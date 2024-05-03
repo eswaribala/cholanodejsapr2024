@@ -7,6 +7,7 @@ const { startSession } = require('mongoose')
 const redis=require('redis')
 //const nodeCache=require('node-cache')
 const nodeCache = require("node-cache");
+const logger=require('../docs/logger')
 //const redisConn= redis.createClient({url:config.get('redis.url')});
 const nodeCacheClient=new nodeCache();
 /*
@@ -35,9 +36,11 @@ if(value){
 }else {
 
     await user.find().countDocuments().then(count => {
-        console.log(count);
+       // console.log(count);
 
-        console.log(pages);
+       // console.log(pages);
+        logger.info(`Total number of Documents ${count}`)
+        logger.info(`Number of Documents to be skipped ${pages}`)
         user.find()
             .skip(pages)
             .limit(limit)
@@ -46,7 +49,9 @@ if(value){
                 //save it in redis cache
                // redisConn.setEx("users", 3000, JSON.stringify(data,
                  //   (_, v) => typeof v === 'bigint' ? v.toString() : v))
-
+                logger.info(JSON.parse(JSON.stringify(data,
+                    (_, v) => typeof v === 'bigint' ? v.toString() : v))
+                )
                 nodeCacheClient.set("users",JSON.stringify(data,
                        (_, v) => typeof v === 'bigint' ? v.toString() : v),3000);
                 res.status(config.get('statusCode.success')).send({
