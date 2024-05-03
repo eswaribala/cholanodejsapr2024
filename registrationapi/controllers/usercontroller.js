@@ -1,4 +1,4 @@
-const db=require('../dbconfiguration/dbconn')
+const conn=require('../dbconfiguration/dbconn')
 const user=require('../models/user');
 const {validationResult}=require('express-validator')
 const config=require('config')
@@ -141,6 +141,10 @@ exports.saveUser=async (req,res)=>{
       })
   }
 
+  //create session
+    const session = await conn.startSession();
+
+
   const userInstance=new user({
       firstName:req.body.firstName,
       lastName:req.body.lastName,
@@ -151,21 +155,23 @@ exports.saveUser=async (req,res)=>{
     })
     //promise resolved --> then
     //promise rejected --> catch
-    await userInstance.save().then(result=>{
+      //begin transaction
+    session.startTransaction()
+    try {
+        await userInstance.save().then(result => {
+            session.commitTransaction()
+            return res.status(config.get('statusCode.created')).json({
+                message: `user instance successfully created ${result}`
+            })
 
-        return res.
-        status(config.get('statusCode.created')).json({
-            message:`user instance successfully created ${result}`
+        }).catch(err => {
+            session.abortTransaction();
+            return res.status(config.get('statusCode.logicError')).json({
+                error: `User Could Not be Saves ${err}`
+            })
         })
-
-    }).catch(err=>{
-
-        return res.
-        status(config.get('statusCode.logicError')).json({
-            error: `User Could Not be Saves ${err}`
-        })
-    })
-
+    }finally{
+       session.endSession()
 
 
 
