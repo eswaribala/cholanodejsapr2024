@@ -2,7 +2,7 @@ const express=require('express')
 const mongoose=require('mongoose')
 const config = require('config')
 const appRoute=require('./routes/approutes')
-const db=require('./dbconfiguration/dbconn')
+const conn=require('./dbconfiguration/dbconn')
 //express instance
 const app=express();
 //format
@@ -24,9 +24,10 @@ app.use((req,res,next)=>{
 app.use('/api', appRoute);
 app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-db.then(result =>{
+conn.once('open',() =>{
     app.listen(process.env.PORT || 3200);
-}).catch(err =>{
+})
+conn.on('err', ()=>{
     console.log(err)
 })
 

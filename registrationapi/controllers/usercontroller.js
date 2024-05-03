@@ -5,10 +5,11 @@ const config=require('config')
 const mongoose=require('mongoose')
 const { startSession } = require('mongoose')
 const redis=require('redis')
-const nodeCache=require('node-cache')
-const NodeCache = require("node-cache");
-const redisConn= redis.createClient({url:config.get('redis.url')});
-const nodeCacheClient=new NodeCache();
+//const nodeCache=require('node-cache')
+const nodeCache = require("node-cache");
+//const redisConn= redis.createClient({url:config.get('redis.url')});
+const nodeCacheClient=new nodeCache();
+/*
 (async ()=>{
     redisConn.on('error', (err) => {
         console.log('Redis Client Error', err);
@@ -19,7 +20,7 @@ const nodeCacheClient=new NodeCache();
 
     await redisConn.ping();
 })();
-
+*/
 //fetch all users
 exports.fetchAllUsers=async (req,res)=>{
     let pages = req.query.pages;
