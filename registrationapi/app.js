@@ -3,6 +3,8 @@ const mongoose=require('mongoose')
 const config = require('config')
 const appRoute=require('./routes/approutes')
 const conn=require('./dbconfiguration/dbconn')
+const dotenv=require('dotenv')
+console.log(`Log Level ${process.env.LOG_LEVEL}`)
 //express instance
 const app=express();
 //format

@@ -20,6 +20,7 @@
     "redis": "^4.6.13",
     "node-cache": "^5.1.2",
     "winston": "^3.13.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "winston-daily-rotate-file": "^5.0.0",
+    "dotenv": "^16.4.5"
   }
 }
