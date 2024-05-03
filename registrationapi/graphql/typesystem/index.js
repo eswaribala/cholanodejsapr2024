@@ -3,7 +3,7 @@ const {buildSchema} = require('graphql/utilities')
 const schema=buildSchema(`
 type Query{
   allUsers:[User]
-  userByMobileNo(mobileNo: String):[User]
+  userByMobileNo(mobileNo: ID):User
 }
 
 type User{

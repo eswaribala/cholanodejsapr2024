@@ -8,11 +8,13 @@ const root={
             (_, v) => typeof v === 'bigint' ? v.toString() : v));
     },
 
-    userByMobileNo:async ({mobileNo})=>{
+    userByMobileNo:async (obj) => {
+        console.log(obj.mobileNo);
 
-        let user=await user.findOne({mobileNo:mobileNo})
-        return JSON.parse(JSON.stringify(user,
-            (_, v) => typeof v === 'bigint' ? v.toString() : v));
+        let userInstance = await user.findOne({mobileNo:obj.mobileNo})
+
+        return userInstance;
+
     }
 
 }
