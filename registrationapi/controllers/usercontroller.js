@@ -63,6 +63,7 @@ if(value){
                         (_, v) => typeof v === 'bigint' ? v.toString() : v))
                 })
             }).catch(error => {
+                logger.error(`${error.message}`)
             res.status(config.get('statusCode.logicError')).send({
                 message: 'users information not found',
                 errorMessage: error.message
