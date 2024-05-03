@@ -144,7 +144,6 @@ exports.saveUser=async (req,res)=>{
   //create session
     const session = await conn.startSession();
 
-
   const userInstance=new user({
       firstName:req.body.firstName,
       lastName:req.body.lastName,
@@ -171,7 +170,7 @@ exports.saveUser=async (req,res)=>{
             })
         })
     }finally{
-       session.endSession()
+       await session.endSession()
 
 
 
