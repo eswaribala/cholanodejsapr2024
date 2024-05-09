@@ -1,12 +1,11 @@
 const express=require('express')
-const mongoose=require('mongoose')
+
 const config = require('config')
 const appRoute=require('./routes/approutes')
-const conn=require('./dbconfiguration/dbconn')
+
 const dotenv=require('dotenv').config()
 console.log(`Log Level ${process.env.LOG_LEVEL}`)
-const schema=require('./graphql/typesystem')
-const root=require('./graphql/graphqlschema')
+
 const {graphqlHTTP} = require("express-graphql");
 //express instance
 const app=express();
@@ -32,18 +31,15 @@ app.use((req,res,next)=>{
  app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 //graphql
+/*
 app.use('/graphql',graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,
 }))
+*/
 
 
-conn.once('open',() =>{
-    app.listen(process.env.PORT || 3200);
-})
-conn.on('err', ()=>{
-    console.log(err)
-})
+app.listen(process.env.PORT || 3400);
 
 

@@ -8,5 +8,8 @@
     "notAuthorised": 403,
     "logicError": 500
 
+  },
+  "services": {
+    "validationUrl": "http://localhost:3200/api/users/validate/v1.0/"
   }
 }

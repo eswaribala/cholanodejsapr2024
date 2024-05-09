@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const userController= require('../controllers/usercontroller')
-const roleController=require('../controllers/rolecontroller')
+const loginController= require('../controllers/logincontroller')
+
 
 /**
  * @swagger
- * /api/users/validate/v1.0/:
+ * /api/login/v1.0/:
  *  post:
  *    description: Use to validate user in DB
  *    produces:
@@ -32,7 +32,7 @@ const roleController=require('../controllers/rolecontroller')
  *      '200':
  *        description: User found successfully.
  */
-router.post('/users/validate/v1.0/', userController.validateUser)
+router.post('/login/v1.0/', loginController.validateUser)
 
 
 module.exports = router
