@@ -262,13 +262,13 @@ router.delete('/users/v1.0/:mobileNo',userController.deleteUser)
  * @swagger
  * /api/users/validate/v1.0/:
  *  post:
- *    description: Use to add user in DB
+ *    description: Use to validate user in DB
  *    produces:
  *      - application/json
  *    parameters:
  *      - in: body
  *        name: Validate user
- *        description: Add user in DB.
+ *        description: Validate user in DB.
  *        schema:
  *          type: object
  *          required:
