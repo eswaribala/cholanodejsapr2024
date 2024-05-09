@@ -1,9 +1,9 @@
 const user=require('../../models/user')
 
 const root={
-    allUsers:async ()=>{
+    allUsers:async ({offset,limit})=>{
 
-        let users=await user.find()
+        let users=await user.find().skip(offset).limit(limit)
         return JSON.parse(JSON.stringify(users,
             (_, v) => typeof v === 'bigint' ? v.toString() : v));
     },

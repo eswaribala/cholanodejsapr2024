@@ -1,23 +1,30 @@
 const {buildSchema} = require('graphql/utilities')
-
+const BigInt=require('graphql-bigint')
+const Date=require('graphql-date')
 const schema=buildSchema(`
+scalar BigInt
+scalar Date
+enum Gender{
+MALE,FEMALE,TRANSGENDER
+}
+
 type Query{
-  allUsers:[User]
-  userByMobileNo(mobileNo: ID):User
+  allUsers(offset:Int,limit:Int):[User]
+  userByMobileNo(mobileNo: BigInt):User
 }
 
 type Mutation{
    addUser(userInput:UserInput): User
-   editUser(firstName:String, mobileNo:String):User
-   deleteUser(mobileNo:String):Boolean
+   editUser(firstName:String, mobileNo:BigInt):User
+   deleteUser(mobileNo:BigInt):Boolean
 }
 
 input UserInput{
   firstName:String,
    lastName:String,
-   dob:String,
-   mobileNo:String,
-   gender:String,
+   dob:Date,
+   mobileNo:BigInt,
+   gender:Gender,
    roles:[String]  
 
 }
@@ -25,9 +32,9 @@ input UserInput{
 type User{
    firstName:String,
    lastName:String,
-   dob:String,
-   mobileNo:String,
-   gender:String,
+   dob:Date,
+   mobileNo:BigInt,
+   gender:Gender,
    roles:[String]   
 }
 `)
