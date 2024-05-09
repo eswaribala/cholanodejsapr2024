@@ -3,25 +3,15 @@ const config=require('config')
 const axios = require("axios");
 exports.validateUserGL=(req,res)=>{
 
-    const data = JSON.stringify({
+
+    axios.post('http://localhost:3200/graphql', {
         query: `{
      validateUser(firstName: "Balasubramaniam", mobileNo: "8056050425") {
         dob
         lastName
     }
   }`,
-    });
-    const options = {
-        hostname: 'localhost',
-        path: 'graphql',
-        port: 3200,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-
-        },
-    };
-    axios.post('http://localhost:3200/graphql', data)
+    })
         .then(response=> {
             console.log(response.data);
             res.status(config.get('statusCode.success')).send({
