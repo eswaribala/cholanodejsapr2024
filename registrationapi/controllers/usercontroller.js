@@ -183,6 +183,27 @@ exports.saveUser=async (req,res)=>{
 
 }
 
+exports.validateUser=async(req,res)=>{
+    const firstName=req.body.firstName;
+    const mobileNo=req.body.mobileNo;
+    await user.findOne({firstName:firstName,mobileNo:mobileNo})
+        .then(data=>{
+
+            res.status(config.get('statusCode.success')).send({
+                message:'user found for the given mobileNo',
+                user:JSON.parse(JSON.stringify(data,
+                    (_, v) => typeof v === 'bigint' ? v.toString() : v))})
+        }).catch(error=>{
+            res.status(config.get('statusCode.logicError')).send({
+                message:`user could not be found for the given mobileNo ${req.params.mobileNo}`,
+                errorMessage: error.message
+            })
+
+        })
+
+}
+
+
 //update User
 exports.updateUser=async (req,res)=>{
  const filter={mobileNo:req.params.mobileNo}

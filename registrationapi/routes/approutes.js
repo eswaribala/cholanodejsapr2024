@@ -255,4 +255,39 @@ router.put('/users/v1.0/:mobileNo',userController.updateUser)
  */
 
 router.delete('/users/v1.0/:mobileNo',userController.deleteUser)
+
+
+
+/**
+ * @swagger
+ * /api/users/validate/v1.0/:
+ *  post:
+ *    description: Use to add user in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: body
+ *        name: Validate user
+ *        description: Add user in DB.
+ *        schema:
+ *          type: object
+ *          required:
+ *            - firstName
+ *            - mobileNo
+ *
+ *          properties:
+ *            firstName:
+ *              type: string
+ *
+ *            mobileNo :
+ *              type: integer
+ *              example: 9952032862
+ *
+ *    responses:
+ *      '200':
+ *        description: User found successfully.
+ */
+router.post('/users/validate/v1.0/', userController.validateUser)
+
+
 module.exports = router
