@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const loginController= require('../controllers/logincontroller')
-
+const service=require('../services/valudateusergl')
 
 /**
  * @swagger
@@ -33,6 +33,6 @@ const loginController= require('../controllers/logincontroller')
  *        description: User found successfully.
  */
 router.post('/login/v1.0/', loginController.validateUser)
-
+router.get('/login/gl/v1.0/', service.validateUserGL)
 
 module.exports = router

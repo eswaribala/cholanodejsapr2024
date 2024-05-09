@@ -5,7 +5,7 @@ const appRoute=require('./routes/approutes')
 
 const dotenv=require('dotenv').config()
 console.log(`Log Level ${process.env.LOG_LEVEL}`)
-const validateUserGL=require('./services/valudateusergl')
+
 const {graphqlHTTP} = require("express-graphql");
 //express instance
 const app=express();
@@ -38,7 +38,7 @@ app.use('/graphql',graphqlHTTP({
     graphiql: true,
 }))
 */
-validateUserGL;
+
 
 app.listen(process.env.PORT || 3400);
 
