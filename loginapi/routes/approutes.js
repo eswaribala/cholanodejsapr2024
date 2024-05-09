@@ -33,7 +33,8 @@ const service=require('../services/valudateusergl')
  *        description: User found successfully.
  */
 router.post('/login/v1.0/', loginController.validateUser)
-/* @swagger
+/**
+ * @swagger
 * /api/login/gl/v1.0/:
 *  post:
     *    description: Use to validate user in DB
