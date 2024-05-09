@@ -27,6 +27,23 @@ const root={
         let userInstance=await user.create(newUser);
         return userInstance;
 
+    },
+
+    editUser:async ({firstName,mobileNo})=>{
+
+       let userInstance=await user.findOneAndUpdate({mobileNo:mobileNo},{firstName:firstName},
+            {new:true});
+       return userInstance;
+
+    },
+
+    deleteUser: async({mobileNo})=>{
+        let data = await user.deleteOne({mobileNo:mobileNo});
+        if(data.deletedCount>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

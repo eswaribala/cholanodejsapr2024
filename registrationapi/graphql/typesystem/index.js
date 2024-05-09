@@ -8,6 +8,8 @@ type Query{
 
 type Mutation{
    addUser(userInput:UserInput): User
+   editUser(firstName:String, mobileNo:String):User
+   deleteUser(mobileNo:String):Boolean
 }
 
 input UserInput{
