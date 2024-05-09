@@ -4,9 +4,9 @@ const axios = require("axios");
 exports.validateUserGL=(req,res)=>{
 
 
-    axios.post('http://localhost:3200/graphql', {
+    axios.post(config.get('services.graphqlUrl'), {
         query: `{
-     validateUser(firstName: "Balasubramaniam", mobileNo: "8056050425") {
+     validateUser(firstName: ${req.body.firstName}, mobileNo: ${req.body.mobileNo}) {
         dob
         lastName
     }

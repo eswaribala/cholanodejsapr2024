@@ -10,7 +10,9 @@
 
   },
   "services": {
-    "validationUrl": "http://localhost:3200/api/users/validate/v1.0/"
+    "validationUrl": "http://localhost:3200/api/users/validate/v1.0/",
+    "graphqlUrl": "http://localhost:3200/graphql"
+
   },
   "graphqlData": {
     "firstName": "Balasubramaniam",
