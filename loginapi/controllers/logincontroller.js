@@ -12,7 +12,7 @@ exports.validateUser=async(req,res)=>{
             console.log(response.data);
             res.status(config.get('statusCode.success')).send({
                 message: 'user found for the given mobileNo',
-                user: response.data
+                user: response.data.user
             })
         })
         .catch(error=> {

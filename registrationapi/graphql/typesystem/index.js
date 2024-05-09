@@ -11,6 +11,7 @@ MALE,FEMALE,TRANSGENDER
 type Query{
   allUsers(offset:Int,limit:Int):[User]
   userByMobileNo(mobileNo: BigInt):User
+  validateUser(firstName:String,mobileNo:BigInt):User
 }
 
 type Mutation{

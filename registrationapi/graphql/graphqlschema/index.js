@@ -44,6 +44,10 @@ const root={
         }else{
             return false;
         }
+    },
+    validateUser:async({firstName,mobileNo})=>{
+        let userInstance=await user.findOne({$and:[{firstName:firstName},{mobileNo:mobileNo}]})
+        return userInstance
     }
 
 
