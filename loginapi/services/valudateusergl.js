@@ -4,7 +4,7 @@ const axios = require("axios");
 exports.validateUserGL=(req,res)=>{
 
     let firstName=JSON.stringify(req.body.firstName)
-    let mobileNo=JSOn.stringify(req.body.mobileNo)
+    let mobileNo=JSON.stringify(req.body.mobileNo)
     axios.post(config.get('services.graphqlUrl'), {
         query: `{
      validateUser(firstName:${firstName} , mobileNo: ${mobileNo}) {
