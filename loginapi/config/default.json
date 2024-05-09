@@ -11,5 +11,10 @@
   },
   "services": {
     "validationUrl": "http://localhost:3200/api/users/validate/v1.0/"
+  },
+  "graphqlData": {
+    "firstName": "Balasubramaniam",
+    "mobileNo": 8056050425
   }
+
 }

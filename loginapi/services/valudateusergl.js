@@ -1,8 +1,8 @@
 const http=require('http')
-
+const config=require('config')
 const data = JSON.stringify({
     query: `{
-     validateUser(firstName: "Balasubramaniam", mobileNo: "8056050425") {
+     validateUser(firstName: ${config.get(graphqlData.firstName)}, mobileNo: ${config.get(graphqlData.mobileNo)}) {
         dob
         lastName
     }
