@@ -195,7 +195,7 @@ exports.validateUser=async(req,res)=>{
                     (_, v) => typeof v === 'bigint' ? v.toString() : v))})
         }).catch(error=>{
             res.status(config.get('statusCode.logicError')).send({
-                message:`user could not be found for the given mobileNo ${req.params.mobileNo}`,
+                message:`user could not be found for the given mobileNo ${mobileNo}`,
                 errorMessage: error.message
             })
 
