@@ -8,11 +8,19 @@ exports.validateUser=async(req,res)=>{
         firstName: req.body.firstName,
         mobileNo: req.body.mobileNo
     })
-        .then(function (response) {
-            console.log(response);
+        .then(response=> {
+            console.log(response.data);
+            res.status(config.get('statusCode.success')).send({
+                message: 'user found for the given mobileNo',
+                user: response.data
+            })
         })
-        .catch(function (error) {
+        .catch(error=> {
             console.log(error);
+            res.status(config.get('statusCode.logicError')).send({
+                message:`user could not be found for the given mobileNo ${mobileNo}`,
+                errorMessage: error.message
+            })
         });
 
 }
