@@ -33,6 +33,17 @@ const service=require('../services/valudateusergl')
  *        description: User found successfully.
  */
 router.post('/login/v1.0/', loginController.validateUser)
+/**
+ * @swagger
+ * /api/login/gl/v1.0/:
+ *  get:
+ *    description: Use to find roles in DB
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      '200':
+ *        description: user fetched successfully.
+ */
 router.get('/login/gl/v1.0/', service.validateUserGL)
 
 module.exports = router

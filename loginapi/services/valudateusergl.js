@@ -1,10 +1,11 @@
 const http=require('http')
 const config=require('config')
-exports.validateUserGL=()=>{
+const axios = require("axios");
+exports.validateUserGL=(req,res)=>{
 
     const data = JSON.stringify({
         query: `{
-     validateUser(firstName: ${config.get(graphqlData.firstName)}, mobileNo: ${config.get(graphqlData.mobileNo)}) {
+     validateUser(firstName: "Balasubramaniam", mobileNo: "8056050425") {
         dob
         lastName
     }
@@ -17,27 +18,28 @@ exports.validateUserGL=()=>{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': data.length,
-            'User-Agent': 'Node',
+
         },
     };
-    const req = http.request(options, (res) => {
-        let data = '';
-        console.log(`statusCode: ${res.statusCode}`);
-
-        res.on('data', (d) => {
-            data += d;
+    axios.post('http://localhost:3200/graphql', data)
+        .then(response=> {
+            console.log(response.data);
+            res.status(config.get('statusCode.success')).send({
+                message: 'user found for the given mobileNo',
+                user: response.data
+            })
+        })
+        .catch(error=> {
+            console.log(error);
+            res.status(config.get('statusCode.logicError')).send({
+                message:`user could not be found for the given mobileNo `,
+                errorMessage: error.message
+            })
         });
-        res.on('end', () => {
-            console.log(JSON.parse(data).data);
-        });
-    });
-    req.on('error', (error) => {
-        console.error(error);
-    });
 
-    req.write(data);
-    req.end();
+
+
 }
+
 
 
