@@ -44,16 +44,18 @@ exports.validateUser=async(req,res)=>{
                     }
                 );
                console.log(token);
-            })
+                res.status(config.get('statusCode.success')).send({
+                    message: 'user found for the given mobileNo',
+                    user: response.data.user,
+                    jwtToken:token
 
-
-
-            res.status(config.get('statusCode.success')).send({
-                message: 'user found for the given mobileNo',
-                user: response.data.user,
-                jwtToken:token
+                })
 
             })
+
+
+
+
 
 
         })
