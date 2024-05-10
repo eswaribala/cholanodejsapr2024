@@ -23,6 +23,7 @@
     "graphql": "^16.8.1",
     "graphql-bigint": "^1.0.0",
     "graphql-date": "^1.0.3",
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "node-vault": "^0.10.2"
   }
 }

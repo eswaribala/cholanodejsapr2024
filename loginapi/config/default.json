@@ -11,8 +11,13 @@
   },
   "services": {
     "validationUrl": "http://localhost:3200/api/users/validate/v1.0/",
-    "graphqlUrl": "http://localhost:3200/graphql"
+    "graphqlUrl": "http://localhost:3200/graphql",
+    "vaultUrl": "http://localhost:8200"
 
+  },
+
+  "tokens": {
+    "vaultToken": "s.Moyx1O1ZFzvCDeMFED8PaO12"
   },
   "graphqlData": {
     "firstName": "Balasubramaniam",
