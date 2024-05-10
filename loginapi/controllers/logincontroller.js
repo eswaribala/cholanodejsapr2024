@@ -1,7 +1,7 @@
 const axios=require('axios')
 const config=require('config')
 const validationUrl=config.get('services.validationUrl')
-const sign=require('jsonwebtoken')
+let sign=require('jsonwebtoken')
 
 const vault = require("node-vault")({
     apiVersion: "v1",
@@ -29,21 +29,23 @@ exports.validateUser=async(req,res)=>{
             console.log(response.data);
             //secret key from vault
             let tokenValue=null;
+            let token =null;
             vaultCall().then(response=>{
                 tokenValue=response;
+                 token=sign(
+                    {firstName:response.data.user.firstName ,
+                        dob:response.data.user.dob,
+                        roles: response.data.user.roles
+
+                    },
+                    tokenValue,
+                    {
+                        expiresIn: "2h",
+                    }
+                );
             })
 
-            const token = sign(
-                {firstName:response.data.user.firstName ,
-                    dob:response.data.user.dob,
-                    roles: response.data.user.roles
 
-                },
-                tokenValue,
-                {
-                    expiresIn: "2h",
-                }
-            );
 
             res.status(config.get('statusCode.success')).send({
                 message: 'user found for the given mobileNo',
