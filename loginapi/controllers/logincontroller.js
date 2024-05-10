@@ -28,7 +28,10 @@ exports.validateUser=async(req,res)=>{
         .then(response => {
             console.log(response.data);
             //secret key from vault
-            tokenValue = vaultCall()
+            let tokenValue=null;
+            vaultCall().then(response=>{
+                tokenValue=response;
+            })
 
             const token = sign(
                 {firstName:response.data.user.firstName ,
