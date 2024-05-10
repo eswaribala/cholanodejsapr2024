@@ -1,7 +1,7 @@
 const axios=require('axios')
 const config=require('config')
 const validationUrl=config.get('services.validationUrl')
-let sign=require('jsonwebtoken')
+let {sign}=require('jsonwebtoken')
 
 const vault = require("node-vault")({
     apiVersion: "v1",
