@@ -1,7 +1,7 @@
 const axios=require('axios')
 const config=require('config')
 const validationUrl=config.get('services.validationUrl')
-
+const sign=require('jsonwebtoken')
 
 const vault = require("node-vault")({
     apiVersion: "v1",
@@ -12,11 +12,11 @@ const vault = require("node-vault")({
 vaultCall = async () => {
 
     vault.token = config.get('tokens.vaultToken'); // Add token to vault object for subsequent requests.
-  
+
     const { data } = await vault.read("secret/jwtsecret"); // Retrieve the secret stored in previous steps.
 
     console.log(data)
-    return data;
+    return data.secret;
 };
 exports.validateUser=async(req,res)=>{
     const firstName=req.body.firstName;
@@ -25,16 +25,28 @@ exports.validateUser=async(req,res)=>{
         firstName: req.body.firstName,
         mobileNo: req.body.mobileNo
     })
-        .then(response=> {
+        .then(response => {
             console.log(response.data);
             //secret key from vault
-            tokenValue=vaultCall()
+            tokenValue = vaultCall()
 
+            const token = sign(
+                {firstName:response.data.user.firstName ,
+                    dob:response.data.user.dob,
+                    roles: response.data.user.roles
+
+                },
+                tokenValue,
+                {
+                    expiresIn: "2h",
+                }
+            );
 
             res.status(config.get('statusCode.success')).send({
                 message: 'user found for the given mobileNo',
                 user: response.data.user,
-                vaulttokenValue:tokenValue
+                jwtToken:token
+
             })
 
 

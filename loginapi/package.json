@@ -24,6 +24,7 @@
     "graphql-bigint": "^1.0.0",
     "graphql-date": "^1.0.3",
     "axios": "^1.6.8",
-    "node-vault": "^0.10.2"
+    "node-vault": "^0.10.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }
