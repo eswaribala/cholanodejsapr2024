@@ -17,9 +17,10 @@ exports.validateUser=async(req,res)=>{
         .then(response=> {
             console.log(response.data);
             //secret key from vault
-            let vaultToken=config.get('tokens.vaultToken');
+            vault.token=config.get('tokens.vaultToken');
+
             const { data } =  vault.read("secret/jwtsecret"); // Retrieve the secret stored in previous steps.
-            console.log(data.secret) 
+            console.log(data)
 
 
             res.status(config.get('statusCode.success')).send({
