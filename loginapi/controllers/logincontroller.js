@@ -30,8 +30,8 @@ exports.validateUser=async(req,res)=>{
             //secret key from vault
             let tokenValue=null;
             let token =null;
-            vaultCall().then(response=>{
-                tokenValue=response;
+            vaultCall().then(vaultResponse=>{
+                tokenValue=vaultResponse;
                  token=sign(
                     {firstName:response.data.user.firstName ,
                         dob:response.data.user.dob,
