@@ -43,6 +43,7 @@ exports.validateUser=async(req,res)=>{
                         expiresIn: "2h",
                     }
                 );
+               console.log(token);
             })
 
 
