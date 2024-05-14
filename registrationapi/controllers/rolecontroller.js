@@ -24,7 +24,28 @@ exports.fetchAllRoles=async (req,res)=>{
 
 
 }
+exports.fetchRoleById=async (req,res)=>{
+    console.log(req.params.roleId)
+    await role.findOne({_id: req.params.roleId})
+        .then(data=> {
+            //console.log(typeof (data[0].mobileNo))
 
+            res.status(config.get('statusCode.success')).send({
+                message: 'roles information ready to consume',
+                roles: data
+
+            })
+        }).catch(error => {
+            res.status(config.get('statusCode.logicError')).send({
+                message: 'roles information not found',
+                errorMessage: error.message
+            })
+
+        })
+
+
+
+}
 
 //saving the role using post
 exports.saveRole=async (req,res)=>{

@@ -1,0 +1,20 @@
+{
+
+  "statusCode":{
+    "success": 200,
+    "created": 201,
+    "badRequest": 400,
+    "notAuthenticated": 401,
+    "notAuthorised": 403,
+    "logicError": 500
+
+  },
+  "services": {
+    "validationUrl": "http://localhost:3400/api/verifyToken/v1.0/",
+
+    "vaultUrl": "http://localhost:8200"
+
+  },
+
+
+}

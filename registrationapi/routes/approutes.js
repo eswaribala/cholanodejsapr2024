@@ -89,6 +89,32 @@ router.post('/roles/v1.0/',roleController.saveRole)
  */
 router.get('/roles/v1.0/',roleController.fetchAllRoles)
 
+
+
+/**
+ * @swagger
+ * /api/roles/v1.0/{roleId}:
+ *  get:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: roleId
+ *        description: find Mobile No  from DB.
+ *        schema:
+ *          type: String
+ *          required:
+ *            - roleId
+ *          properties:
+ *            roleId:
+ *              type: String
+ *    responses:
+ *      '200':
+ *        description: Roles fetched successfully.
+ */
+router.get('/roles/v1.0/:roleId',roleController.fetchRoleById)
+
 /**
  * @swagger
  * /api/users/v1.0/:

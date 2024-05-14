@@ -1,0 +1,19 @@
+{
+  "swaggerDefinition": {
+    "info": {
+      "title": "Login API",
+      "version": "1.0.0",
+      "description": "Login API documentation",
+      "contact": {
+        "name": "Parameswari Bala"
+      },
+      "servers": [
+        "http://localhost:3400"
+      ]
+    }
+  },
+  "apis": [
+    "app.js",
+    "./routes/*.js"
+  ]
+}

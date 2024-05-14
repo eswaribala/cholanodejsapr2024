@@ -186,6 +186,7 @@ exports.saveUser=async (req,res)=>{
 exports.validateUser=async(req,res)=>{
     const firstName=req.body.firstName;
     const mobileNo=req.body.mobileNo;
+    console.log(firstName+""+mobileNo);
     await user.findOne({$and:[{firstName:firstName},{mobileNo:mobileNo}]})
         .then(data=>{
 

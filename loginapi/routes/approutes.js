@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const loginController= require('../controllers/logincontroller')
-const service=require('../services/valudateusergl')
+const service=require('../services/validateusergl')
+const authenticate=require('../services/authentication')
 
 /**
  * @swagger
@@ -63,5 +64,33 @@ router.post('/login/v1.0/', loginController.validateUser)
 *        description: User found successfully.
 */
 router.post('/login/gl/v1.0/', service.validateUserGL)
+/**
+ * @swagger
+ * /api/verifyToken/1.0/:
+ *  post:
+ *    description: Use to validate user in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: body
+ *        name: Validate Token
+ *        description: Validate user in DB.
+ *        schema:
+ *          type: object
+ *          required:
+ *            - token
+ *
+ *          properties:
+ *            token:
+ *              type: string
+ *
+ *
+ *    responses:
+ *      '200':
+ *        description: Token verified successfully.
+ */
+router.post('/verifyToken/v1.0/', authenticate.verifyToken)
+
+
 
 module.exports = router
