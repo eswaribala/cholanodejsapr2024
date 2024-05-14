@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 const chitController=require('../controllers/chitcontroller')
+const {authenticate, authorize} = require("../controllers/chitcontroller");
 
 /**
  * @swagger
@@ -15,6 +16,6 @@ const chitController=require('../controllers/chitcontroller')
 *      '200':
 *        description: Token Validation success.
 */
-router.get('/chits/v1.0/', chitController.createChit )
+router.get('/chits/v1.0/', authenticate, authorize,chitController.createChit )
 
 module.exports = router
