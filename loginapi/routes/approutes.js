@@ -3,7 +3,7 @@ const router = express.Router();
 const loginController= require('../controllers/logincontroller')
 const service=require('../services/validateusergl')
 const authenticate=require('../services/authentication')
-
+const authorization=require('../services/authorization')
 /**
  * @swagger
  * /api/login/v1.0/:
@@ -91,6 +91,28 @@ router.post('/login/gl/v1.0/', service.validateUserGL)
  */
 router.post('/verifyToken/v1.0/', authenticate.verifyToken)
 
-
+/**
+ * @swagger
+ * /api/authorize/v1.0/{roleId}:
+ *  get:
+ *    description: Use to find user by mobileNo in DB
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: roleId
+ *        description: find Mobile No  from DB.
+ *        schema:
+ *          type: String
+ *          required:
+ *            - roleId
+ *          properties:
+ *            roleId:
+ *              type: String
+ *    responses:
+ *      '200':
+ *        description: Roles fetched successfully.
+ */
+router.get('/authorize/v1.0/:roleId', authorization.authorize)
 
 module.exports = router

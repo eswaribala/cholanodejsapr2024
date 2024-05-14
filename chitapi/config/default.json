@@ -11,10 +11,10 @@
   },
   "services": {
     "validationUrl": "http://localhost:3400/api/verifyToken/v1.0/",
-
+    "authorizationUrl": "http://localhost:3400/api/authorize/v1.0/",
     "vaultUrl": "http://localhost:8200"
 
-  },
+  }
 
 
 }
