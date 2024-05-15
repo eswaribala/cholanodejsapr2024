@@ -1,0 +1,13 @@
+docker -v
+docker pull mongo
+docker run --name=mongo-c1 -p 27017:27017 -d mongo
+docker container ls -a
+#to restart container if it is stoppped
+docker container start <dockerid>
+ #docker client without compass
+  docker exec -it <dockerid> /bin/bash
+  mongosh
+  show dbs
+  
+  
+  
