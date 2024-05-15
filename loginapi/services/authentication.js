@@ -11,14 +11,14 @@ vaultCall = async () => {
 
     vault.token = config.get('tokens.vaultToken'); // Add token to vault object for subsequent requests.
 
-    const { data } = await vault.read("secret/jwtsecret"); // Retrieve the secret stored in previous steps.
+    const { data } = await vault.read("secret/data/jwtsecret"); // Retrieve the secret stored in previous steps.
 
-    console.log(data)
-    return data.secret;
+    console.log(data.data.secret)
+    return data.data.secret;
 };
 exports.verifyToken=async(req,res)=>{
 
-   const token =req.body.token
+    const token =req.body.token
     if (!token) return res.status(401).json({ error: 'Access denied' });
     try {
         vaultCall().then(response=>{

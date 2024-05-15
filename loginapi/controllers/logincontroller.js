@@ -13,10 +13,10 @@ vaultCall = async () => {
 
     vault.token = config.get('tokens.vaultToken'); // Add token to vault object for subsequent requests.
 
-    const { data } = await vault.read("secret/jwtsecret"); // Retrieve the secret stored in previous steps.
+    const data  = await vault.read("secret/data/jwtsecret"); // Retrieve the secret stored in previous steps.
 
-    console.log(data)
-    return data.secret;
+    console.log(data.data.secret)
+    return data.data.secret;
 };
 exports.validateUser=async(req,res)=>{
     const firstName=req.body.firstName;
@@ -26,11 +26,12 @@ exports.validateUser=async(req,res)=>{
         mobileNo: req.body.mobileNo
     })
         .then(response => {
-            console.log(response.data);
+            //console.log(response.data);
             //secret key from vault
             let tokenValue=null;
             let token =null;
             vaultCall().then(vaultResponse=>{
+              //  console.log("Vault response"+vaultResponse)
                 tokenValue=vaultResponse;
                  token=sign(
                     {firstName:response.data.user.firstName ,
@@ -43,7 +44,7 @@ exports.validateUser=async(req,res)=>{
                         expiresIn: "2h",
                     }
                 );
-               console.log(token);
+              // console.log(token);
                 res.status(config.get('statusCode.success')).send({
                     message: 'user found for the given mobileNo',
                     user: response.data.user,
@@ -60,7 +61,7 @@ exports.validateUser=async(req,res)=>{
 
         })
         .catch(error=> {
-            console.log(error);
+           // console.log(error);
             res.status(config.get('statusCode.logicError')).send({
                 message:`user could not be found for the given mobileNo ${mobileNo}`,
                 errorMessage: error.message

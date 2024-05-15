@@ -5,7 +5,7 @@
     "url": "redis://localhost:6379"
   },
   "mongodb": {
-    "url": "mongodb://localhost:27017/userdb"
+    "url": "mongodb://mongo:27017/userdb"
   },
   "statusCode":{
     "success": 200,
