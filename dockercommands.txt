@@ -1,4 +1,4 @@
-docker -v
+sudo docker -v
 docker pull mongo
 docker run --name=mongo-c1 -p 27017:27017 -d mongo
 docker container ls -a
@@ -13,5 +13,6 @@ docker container start <dockerid>
 git clone -b projects https://github.com/eswaribala/cholanodejsapr2024
 #go to registration api folder
 docker build -f Dockerfile -t regapp .
-
+#install docker compose 
+sudo apt install docker-compose
   
