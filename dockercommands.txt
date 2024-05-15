@@ -9,5 +9,6 @@ docker container start <dockerid>
   mongosh
   show dbs
   
-  
+#to clone nodejs project
+git clone -b projects https://github.com/eswaribala/cholanodejsapr2024
   
