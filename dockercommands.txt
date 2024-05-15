@@ -11,4 +11,7 @@ docker container start <dockerid>
   
 #to clone nodejs project
 git clone -b projects https://github.com/eswaribala/cholanodejsapr2024
+#go to registration api folder
+docker build -f Dockerfile -t regapp .
+
   
