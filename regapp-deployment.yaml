@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reg-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reg-api
+  template:
+    metadata:
+      labels:
+        app: reg-api
+    spec:
+      containers:
+        - name: reg-api
+          image: eswaribala/cholatrainingapr2024:regapp
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3200
+          env:
+            - name: MONGO_URI
+              value: mongodb://mongo:27017/userdb
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reg-service
+spec:
+  selector:
+    app: reg-api
+  ports:
+    - protocol: TCP
+      port: 3200
+      targetPort: 3200
+  type: LoadBalancer
