@@ -18,4 +18,7 @@ docker build -f Dockerfile -t regapp .
 docker rmi <imagename>
 #install docker compose 
 sudo apt install docker-compose
-  
+#to list the network
+docker network ls
+#to create network
+docker network create cholanetwork
