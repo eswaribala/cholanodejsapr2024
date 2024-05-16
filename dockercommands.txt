@@ -22,3 +22,7 @@ sudo apt install docker-compose
 docker network ls
 #to create network
 docker network create cholanetwork
+#pushing images to docker hub
+docker tag registrationapi_regapp:latest eswaribala/cholatrainingapr2024:regapp
+docker push eswaribala/cholatrainingapr2024:regapp
+
