@@ -13,13 +13,13 @@ spec:
         app: reg-api
     spec:
       containers:
-        - name: reg-api
+        
         - args:
             - npm
             - start
             
           image: eswaribala/cholatrainingapr2024:regapp
-          
+          name: reg-api
           ports:
             - containerPort: 3200
           env:
