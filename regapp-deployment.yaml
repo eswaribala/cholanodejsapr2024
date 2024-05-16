@@ -36,7 +36,6 @@ spec:
   selector:
     app: reg-api
   ports:
-    #- protocol: TCP
-      port: 3200
+    - port: 3200
       targetPort: 3200
   type: LoadBalancer
