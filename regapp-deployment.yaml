@@ -17,7 +17,7 @@ spec:
         - args:
             - npm
             - start
-            
+            - dev  
           image: eswaribala/cholatrainingapr2024:regapp
           
           ports:
@@ -36,7 +36,7 @@ spec:
   selector:
     app: reg-api
   ports:
-    - name: "3200"
+    #- protocol: TCP
       port: 3200
       targetPort: 3200
   type: LoadBalancer
