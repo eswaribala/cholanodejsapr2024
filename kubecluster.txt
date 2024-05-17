@@ -34,3 +34,15 @@ kubectl get pods
 kubectl get svc
 kubectl get deploy
 
+#create worker nodes
+create role with role name chola role
+AmazonEC2ContainerRegistry 
+AmazonEKS_CNI_Policy	 
+AmazonEKSWorkerNodePolicy
+AmazonEC2ContainerRegistryReadOnly
+
+create kubecluster nodegroup using aws gui --> compute under kubecluster
+
+
+
+
