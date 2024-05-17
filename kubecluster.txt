@@ -29,3 +29,8 @@ aws eks update-kubeconfig --name <cluster_name>
 Test your configuration:
 kubectl version
 
+#check pod,svc and deploy
+kubectl get pods
+kubectl get svc
+kubectl get deploy
+
