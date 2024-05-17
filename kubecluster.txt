@@ -42,6 +42,8 @@ AmazonEKSWorkerNodePolicy
 AmazonEC2ContainerRegistryReadOnly
 
 create kubecluster nodegroup using aws gui --> compute under kubecluster
+#test the worker nodes
+kubectl get nodes
 
 
 
