@@ -21,4 +21,11 @@ aws configure
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
+#create kube cluster using us-west 
+
+Use the AWS CLI update-kubeconfig command to create or update your kubeconfig for your cluster.
+aws eks update-kubeconfig --name <cluster_name>
+
+Test your configuration:
+kubectl version
 
