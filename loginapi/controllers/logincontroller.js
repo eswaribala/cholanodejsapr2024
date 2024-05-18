@@ -38,7 +38,7 @@ exports.validateUser=async(req,res)=>{
         mobileNo: req.body.mobileNo
     })
         .then(response => {
-            //console.log(response.data);
+            console.log(response.data);
             //secret key from vault
             let tokenValue=null;
             let token =null;
@@ -59,7 +59,7 @@ exports.validateUser=async(req,res)=>{
             }
 
             tokenValue = response.SecretString;
-
+            console.log(tokenValue)
 
             token=sign(
                     {firstName:response.data.user.firstName ,

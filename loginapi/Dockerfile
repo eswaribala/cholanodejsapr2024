@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR /usr/app
+WORKDIR /usr/loginapp
 COPY package*.json ./
 RUN npm install --force
 COPY . . 
