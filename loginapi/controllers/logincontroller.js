@@ -2,7 +2,8 @@ const axios=require('axios')
 const config=require('config')
 const validationUrl=config.get('services.validationUrl')
 let {sign}=require('jsonwebtoken')
-
+const { SecretsManagerClient, GetSecretValueCommand} = require("@aws-sdk/client-secrets-manager");
+/*
 const vault = require("node-vault")({
     apiVersion: "v1",
     endpoint: config.get('services.vaultUrl'),
@@ -18,6 +19,17 @@ vaultCall = async () => {
     console.log(data.data.secret)
     return data.data.secret;
 };
+
+ */
+
+const secret_name = "jwtsecret";
+
+const client = new SecretsManagerClient({
+    region: "us-east-1",
+});
+
+let response;
+
 exports.validateUser=async(req,res)=>{
     const firstName=req.body.firstName;
     const mobileNo=req.body.mobileNo;
@@ -30,10 +42,26 @@ exports.validateUser=async(req,res)=>{
             //secret key from vault
             let tokenValue=null;
             let token =null;
-            vaultCall().then(vaultResponse=>{
+          //  vaultCall().then(vaultResponse=>{
               //  console.log("Vault response"+vaultResponse)
-                tokenValue=vaultResponse;
-                 token=sign(
+            //    tokenValue=vaultResponse;
+            try {
+                response = client.send(
+                    new GetSecretValueCommand({
+                        SecretId: secret_name,
+                        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+                    })
+                );
+            } catch (error) {
+                // For a list of exceptions thrown, see
+                // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+                throw error;
+            }
+
+            tokenValue = response.SecretString;
+
+
+            token=sign(
                     {firstName:response.data.user.firstName ,
                         dob:response.data.user.dob,
                         roles: response.data.user.roles
@@ -44,7 +72,7 @@ exports.validateUser=async(req,res)=>{
                         expiresIn: "2h",
                     }
                 );
-              // console.log(token);
+               console.log(token);
                 res.status(config.get('statusCode.success')).send({
                     message: 'user found for the given mobileNo',
                     user: response.data.user,
@@ -52,7 +80,7 @@ exports.validateUser=async(req,res)=>{
 
                 })
 
-            })
+            //})
 
 
 
