@@ -10,10 +10,10 @@
 
   },
   "services": {
-    "validationUrl": "http://host.docker.internal:3200/api/users/validate/v1.0/",
+    "validationUrl": "http://a6d28002f5bcc4083bf1d3ffb1971c50-548117818.us-west-2.elb.amazonaws.com:3200/api/users/validate/v1.0/",
     "dummyUrl": "http://jsonplaceholder.typicode.com/users",
-    "roleUrl": "http://host.docker.internal:3200/api/roles/v1.0/",
-    "graphqlUrl": "http://host.docker.internal:3200/graphql",
+    "roleUrl": "http://a6d28002f5bcc4083bf1d3ffb1971c50-548117818.us-west-2.elb.amazonaws.com:3200/api/roles/v1.0/",
+    "graphqlUrl": "http://a6d28002f5bcc4083bf1d3ffb1971c50-548117818.us-west-2.elb.amazonaws.com:3200/graphql",
     "vaultUrl": "http://host.docker.internal:8200"
 
   },
