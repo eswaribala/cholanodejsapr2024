@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: login-api
+  template:
+    metadata:
+      labels:
+        app: login-api
+    spec:
+      containers:
+        
+        - args:
+            - npm
+            - start
+              
+          image: eswaribala/cholatrainingapr2024:loginapp
+          name: login-api  
+          ports:
+            - containerPort: 3400
+          
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-service
+spec:
+  selector:
+    app: login-api
+  ports:
+    - port: 3400
+      targetPort: 3400
+  type: LoadBalancer
