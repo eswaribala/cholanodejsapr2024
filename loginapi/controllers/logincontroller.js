@@ -24,15 +24,12 @@ vaultCall = async () => {
 
 const secret_name = "jwtsecret";
 
-const client = new SecretsManagerClient({
-    region: "us-east-1",
-});
-
-let response;
 
 exports.validateUser=async(req,res)=>{
     const firstName=req.body.firstName;
     const mobileNo=req.body.mobileNo;
+    console.log(validationUrl+"\n");
+    console.log(firstName+","+mobileNo)
     axios.post(validationUrl, {
         firstName: req.body.firstName,
         mobileNo: req.body.mobileNo
@@ -42,43 +39,57 @@ exports.validateUser=async(req,res)=>{
             //secret key from vault
             let tokenValue=null;
             let token =null;
+
+            const client = new SecretsManagerClient({
+                region: "us-east-1",
+            });
+
+
           //  vaultCall().then(vaultResponse=>{
               //  console.log("Vault response"+vaultResponse)
             //    tokenValue=vaultResponse;
+            let secretResponse;
             try {
-                response = client.send(
+                secretResponse = client.send(
                     new GetSecretValueCommand({
-                        SecretId: secret_name,
-                        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+                        SecretId: secret_name
+
                     })
                 );
+                 secretResponse.then(data=>{
+                    console.log(JSON.parse(data.SecretString));
+                    tokenValue=JSON.parse(data.SecretString).secret;
+                     token = sign(
+                         {
+                             firstName: response.data.user.firstName,
+                             dob: response.data.user.dob,
+                             roles: response.data.user.roles
+
+                         },
+                         tokenValue,
+                         {
+                             expiresIn: "2h",
+                         }
+                     );
+                     console.log(token);
+                     res.status(config.get('statusCode.success')).send({
+                         message: 'user found for the given mobileNo',
+                         user: response.data.user,
+                         jwtToken: token
+
+                     })
+
+                });
+               // console.log("Token Value" + tokenValue)
+
+
             } catch (error) {
                 // For a list of exceptions thrown, see
                 // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
                 throw error;
             }
 
-            tokenValue = response.SecretString;
-            console.log(tokenValue)
 
-            token=sign(
-                    {firstName:response.data.user.firstName ,
-                        dob:response.data.user.dob,
-                        roles: response.data.user.roles
-
-                    },
-                    tokenValue,
-                    {
-                        expiresIn: "2h",
-                    }
-                );
-               console.log(token);
-                res.status(config.get('statusCode.success')).send({
-                    message: 'user found for the given mobileNo',
-                    user: response.data.user,
-                    jwtToken:token
-
-                })
 
             //})
 
