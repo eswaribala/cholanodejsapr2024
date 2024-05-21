@@ -5,6 +5,7 @@ import {Individual} from "./models/Individual";
 import {Gender} from "./models/gender";
 import {Corporate} from "./models/corporate";
 import {CompanyType} from "./models/companytype";
+import {AutoGenerator} from "./models/autogenerator";
 
 
 //let customer:Customer=new Customer(2374763247,new Name("Parameswari",
@@ -23,14 +24,14 @@ Object.keys(customer).forEach(key=>{
 */
 
 //individual
-let individual:Individual=new Individual(2374763247,new Name("Parameswari",
+let individual:Individual=new Individual(AutoGenerator.generateAccountNo(10000000,1000),new Name("Parameswari",
     "Bala",""),new Address("10d","First Street",
     "Avadi","TN"),9952032862,"param@gmail.com","Test@123",
     Gender.FEMALE,new Date(1970,12,2))
 console.log(individual)
 
 //corporate
-let corporate:Corporate=new Corporate(2374763247,new Name("VHEBANDCO",
+let corporate:Corporate=new Corporate(AutoGenerator.generateAccountNo(10000000,1000),new Name("VHEBANDCO",
     "Software Consulting Services",""),new Address("10d","First Street",
     "Avadi","TN"),9952032863,"vhebcompany@gmail.com","Test@123",
     CompanyType.PRIVATE);
