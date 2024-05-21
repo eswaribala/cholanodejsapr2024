@@ -1,7 +1,7 @@
 import {Name} from "./name";
 import {Address} from "./address";
 
-class Customer{
+export class Customer{
     private _accountNo:number;
     private _name:Name;
     private _address:Address;
