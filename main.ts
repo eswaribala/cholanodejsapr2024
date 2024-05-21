@@ -7,6 +7,8 @@ import {Corporate} from "./models/corporate";
 import {CompanyType} from "./models/companytype";
 import {AutoGenerator} from "./models/autogenerator";
 import {IndividualImpl} from "./business/customerimpl";
+import {Account} from "./models/account";
+import {SavingsAccount} from "./models/savingsaccount";
 
 
 //let customer:Customer=new Customer(2374763247,new Name("Parameswari",
@@ -44,4 +46,16 @@ let customerObj:Customer=individual;
 console.log(customerObj);
 
 //let individualObj:Individual=customer;
-let indivdualImpl:IndividualImpl=new IndividualImpl();
+let individualImpl:IndividualImpl=new IndividualImpl();
+individualImpl.addIndividual(individual);
+individualImpl.addAccount(new SavingsAccount(2848732,
+    new Date(2007,12,1),individual,0.8))
+
+individualImpl.individuals.forEach(individual=>{
+    console.log(individual)
+})
+individualImpl.accounts.forEach(account=>{
+    console.log(account)
+    }
+)
+

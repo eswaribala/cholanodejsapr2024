@@ -6,29 +6,35 @@ import {Individual} from "../models/Individual";
 
 //multiple inheritance
 export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
-    private individuals:Individual[];
-    private accounts:Account[];
+
+    private _individuals:Individual[];
+    private _accounts:Account[];
     // @ts-ignore
-    private individualMap:Map<Individual,Account>;
+    private _individualMap:Map<Individual,Account>;
 
 
     constructor() {
-        this.individuals=new Array();
-        this.accounts=new Array();
+        this._individuals=new Array();
+        this._accounts=new Array();
         // @ts-ignore
-        this.individualMap=new Map<Individual,Account>();
+        this._individualMap=new Map<Individual,Account>();
 
     }
 
     addAccount(account: Account): Account {
-        return undefined;
+        this._accounts.push(account)
+        this._individualMap.set(account.customer,account);
+        return account;
     }
 
     addIndividual(individual: Individual): Individual {
-        return undefined;
+        this._individuals.push(individual)
+
+        return individual;
     }
 
     deleteAccount(accountNo: number): boolean {
+
         return false;
     }
 
@@ -37,7 +43,7 @@ export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
     }
 
     getAccounts(): Account[] {
-        return [];
+        return this._accounts;
     }
 
     getIndividualByMobileNo(mobileNo: number): Individual {
@@ -45,7 +51,7 @@ export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
     }
 
     getIndividuals(): Individual[] {
-        return [];
+        return this._individuals;
     }
 
     updateAccount(runningTotal: number, accountNo: number): Account {
@@ -55,5 +61,16 @@ export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
     updateIndividual(mobileNo: number): Individual {
         return undefined;
     }
+    get individuals(): Individual[] {
+        return this._individuals;
+    }
 
+    get accounts(): Account[] {
+        return this._accounts;
+    }
+
+    // @ts-ignore
+    get individualMap(): Map<Individual, Account> {
+        return this._individualMap;
+    }
 }
