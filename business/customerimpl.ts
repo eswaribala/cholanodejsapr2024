@@ -4,9 +4,24 @@ import {ExtendedIndividualDao} from "../facades/extendedIndividualdao";
 import {Account} from "../models/account";
 import {Individual} from "../models/Individual";
 
-export  class individualImpl implements ExtendedIndividualDao,AccountDao{
+//multiple inheritance
+export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
+    private individuals:Individual[];
+    private accounts:Account[];
+    // @ts-ignore
+    private individualMap:Map<Individual,Account>;
+
+
+    constructor() {
+        this.individuals=new Array();
+        this.accounts=new Array();
+        // @ts-ignore
+        this.individualMap=new Map<Individual,Account>();
+
+    }
+
     addAccount(account: Account): Account {
-        return undefined;
+
     }
 
     addIndividual(individual: Individual): Individual {

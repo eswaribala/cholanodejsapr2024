@@ -6,6 +6,7 @@ import {Gender} from "./models/gender";
 import {Corporate} from "./models/corporate";
 import {CompanyType} from "./models/companytype";
 import {AutoGenerator} from "./models/autogenerator";
+import {IndividualImpl} from "./business/customerimpl";
 
 
 //let customer:Customer=new Customer(2374763247,new Name("Parameswari",
@@ -42,4 +43,3 @@ console.log(corporate);
 let customerObj:Customer=individual;
 console.log(customerObj);
 
-//let individualObj:Individual=customer;

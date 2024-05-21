@@ -7,6 +7,7 @@ var gender_1 = require("./models/gender");
 var corporate_1 = require("./models/corporate");
 var companytype_1 = require("./models/companytype");
 var autogenerator_1 = require("./models/autogenerator");
+var customerimpl_1 = require("./business/customerimpl");
 //let customer:Customer=new Customer(2374763247,new Name("Parameswari",
 //  "Bala",""),new Address("10d","First Street",
 //"Avadi","TN"),9952032862,"param@gmail.com","Test@123");
@@ -31,3 +32,4 @@ console.log(corporate);
 var customerObj = individual;
 console.log(customerObj);
 //let individualObj:Individual=customer;
+var indivdualImpl = new customerimpl_1.IndividualImpl();
