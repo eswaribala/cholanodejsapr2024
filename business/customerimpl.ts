@@ -3,7 +3,6 @@ import {AccountDao} from "../facades/accountDao";
 import {ExtendedIndividualDao} from "../facades/extendedIndividualdao";
 import {Account} from "../models/account";
 import {Individual} from "../models/Individual";
-
 //multiple inheritance
 export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
 
