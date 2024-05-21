@@ -4,6 +4,12 @@ class Name{
     private _middleName:string;
 
 
+    constructor(firstName: string, lastName: string, middleName: string) {
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._middleName = middleName;
+    }
+
     set firstName(value:string){
         this._firstName=value;
     }
