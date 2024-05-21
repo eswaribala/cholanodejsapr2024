@@ -2,12 +2,12 @@ import {Name} from "./name";
 import {Address} from "./address";
 
 export class Customer{
-    private _accountNo:number;
-    private _name:Name;
-    private _address:Address;
-    private _contactNo:number;
-    private _email:string;
-    private _password:string;
+    protected _accountNo:number;
+    protected _name:Name;
+    protected _address:Address;
+    protected _contactNo:number;
+    protected _email:string;
+    protected _password:string;
 
 
     constructor(accountNo: number, name: Name, address: Address, contactNo: number, email: string, password: string) {
