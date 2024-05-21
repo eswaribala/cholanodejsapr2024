@@ -43,3 +43,5 @@ console.log(corporate);
 let customerObj:Customer=individual;
 console.log(customerObj);
 
+//let individualObj:Individual=customer;
+let indivdualImpl:IndividualImpl=new IndividualImpl();

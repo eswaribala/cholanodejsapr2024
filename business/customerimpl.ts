@@ -21,7 +21,7 @@ export  class IndividualImpl implements ExtendedIndividualDao,AccountDao{
     }
 
     addAccount(account: Account): Account {
-
+        return undefined;
     }
 
     addIndividual(individual: Individual): Individual {
