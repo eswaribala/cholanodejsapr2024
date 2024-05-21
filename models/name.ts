@@ -1,4 +1,4 @@
-class Name{
+export class Name{
     private _firstName:string;
     private _lastName:string;
     private _middleName:string;
