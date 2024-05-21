@@ -47,9 +47,14 @@ console.log(customerObj);
 
 //let individualObj:Individual=customer;
 let individualImpl:IndividualImpl=new IndividualImpl();
-individualImpl.addIndividual(individual);
-individualImpl.addAccount(new SavingsAccount(2848732,
-    new Date(2007,12,1),individual,0.8))
+for(let i=0;i<10;i++) {
+    individualImpl.addIndividual(individual);
+    individualImpl.addAccount(new SavingsAccount(2848732,
+        new Date(AutoGenerator.generateYear(2024,1970),
+            12,1),individual,0.8))
+}
+
+
 
 individualImpl.individuals.forEach(individual=>{
     console.log(individual)

@@ -8,6 +8,7 @@ var corporate_1 = require("./models/corporate");
 var companytype_1 = require("./models/companytype");
 var autogenerator_1 = require("./models/autogenerator");
 var customerimpl_1 = require("./business/customerimpl");
+var savingsaccount_1 = require("./models/savingsaccount");
 //let customer:Customer=new Customer(2374763247,new Name("Parameswari",
 //  "Bala",""),new Address("10d","First Street",
 //"Avadi","TN"),9952032862,"param@gmail.com","Test@123");
@@ -32,4 +33,14 @@ console.log(corporate);
 var customerObj = individual;
 console.log(customerObj);
 //let individualObj:Individual=customer;
-var indivdualImpl = new customerimpl_1.IndividualImpl();
+var individualImpl = new customerimpl_1.IndividualImpl();
+for (var i = 0; i < 10; i++) {
+    individualImpl.addIndividual(individual);
+    individualImpl.addAccount(new savingsaccount_1.SavingsAccount(2848732, new Date(autogenerator_1.AutoGenerator.generateYear(2024, 1970), 12, 1), individual, 0.8));
+}
+individualImpl.individuals.forEach(function (individual) {
+    console.log(individual);
+});
+individualImpl.accounts.forEach(function (account) {
+    console.log(account);
+});
