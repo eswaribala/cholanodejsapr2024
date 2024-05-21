@@ -1,7 +1,7 @@
 import {Name} from "./name";
 import {Address} from "./address";
 
-export class Customer{
+export abstract class Customer{
     protected _accountNo:number;
     protected _name:Name;
     protected _address:Address;
@@ -67,4 +67,8 @@ export class Customer{
     set password(value: string) {
         this._password = value;
     }
+
+    abstract deposit():number;
+    abstract withdraw(amount:number):number;
+
 }

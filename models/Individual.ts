@@ -31,4 +31,12 @@ export class Individual extends Customer{
     set dob(value: Date) {
         this._dob = value;
     }
+
+    deposit(): number {
+        return 0;
+    }
+
+    withdraw(amount: number): number {
+        return 0;
+    }
 }

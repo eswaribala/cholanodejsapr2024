@@ -20,4 +20,12 @@ export class Corporate extends Customer{
     set companyType(value: CompanyType) {
         this._companyType = value;
     }
+
+    deposit(): number {
+        return 0;
+    }
+
+    withdraw(amount: number): number {
+        return 0;
+    }
 }
