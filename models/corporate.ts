@@ -3,7 +3,7 @@ import {CompanyType} from "./companytype";
 import {Name} from "./name";
 import {Address} from "./address";
 
-class Corporate extends Customer{
+export class Corporate extends Customer{
    private _companyType:CompanyType;
 
 

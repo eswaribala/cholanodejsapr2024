@@ -3,7 +3,7 @@ import {Gender} from "./gender";
 import {Name} from "./name";
 import {Address} from "./address";
 
-class Individual extends Customer{
+export class Individual extends Customer{
     private _gender:Gender;
     private _dob: Date;
 
