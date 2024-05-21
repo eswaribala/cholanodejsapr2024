@@ -7,10 +7,10 @@ import {Corporate} from "./models/corporate";
 import {CompanyType} from "./models/companytype";
 
 
-let customer:Customer=new Customer(2374763247,new Name("Parameswari",
-    "Bala",""),new Address("10d","First Street",
-    "Avadi","TN"),9952032862,"param@gmail.com","Test@123");
-
+//let customer:Customer=new Customer(2374763247,new Name("Parameswari",
+  //  "Bala",""),new Address("10d","First Street",
+    //"Avadi","TN"),9952032862,"param@gmail.com","Test@123");
+/*
 Object.keys(customer).forEach(key=>{
     if(key=='_address'){
         Object.keys(customer.address).forEach(akey=>{
@@ -20,7 +20,7 @@ Object.keys(customer).forEach(key=>{
         console.log(key + "\t" + customer[key as keyof typeof customer]);
     }
 })
-
+*/
 
 //individual
 let individual:Individual=new Individual(2374763247,new Name("Parameswari",
@@ -36,3 +36,9 @@ let corporate:Corporate=new Corporate(2374763247,new Name("VHEBANDCO",
     CompanyType.PRIVATE);
 
 console.log(corporate);
+
+//runtime polymorphism
+let customerObj:Customer=individual;
+console.log(customerObj);
+
+//let individualObj:Individual=customer;
