@@ -6,6 +6,7 @@ var Individual_1 = require("./models/Individual");
 var gender_1 = require("./models/gender");
 var corporate_1 = require("./models/corporate");
 var companytype_1 = require("./models/companytype");
+var autogenerator_1 = require("./models/autogenerator");
 //let customer:Customer=new Customer(2374763247,new Name("Parameswari",
 //  "Bala",""),new Address("10d","First Street",
 //"Avadi","TN"),9952032862,"param@gmail.com","Test@123");
@@ -21,10 +22,10 @@ Object.keys(customer).forEach(key=>{
 })
 */
 //individual
-var individual = new Individual_1.Individual(2374763247, new name_1.Name("Parameswari", "Bala", ""), new address_1.Address("10d", "First Street", "Avadi", "TN"), 9952032862, "param@gmail.com", "Test@123", gender_1.Gender.FEMALE, new Date(1970, 12, 2));
+var individual = new Individual_1.Individual(autogenerator_1.AutoGenerator.generateAccountNo(10000000, 1000), new name_1.Name("Parameswari", "Bala", ""), new address_1.Address("10d", "First Street", "Avadi", "TN"), 9952032862, "param@gmail.com", "Test@123", gender_1.Gender.FEMALE, new Date(1970, 12, 2));
 console.log(individual);
 //corporate
-var corporate = new corporate_1.Corporate(2374763247, new name_1.Name("VHEBANDCO", "Software Consulting Services", ""), new address_1.Address("10d", "First Street", "Avadi", "TN"), 9952032863, "vhebcompany@gmail.com", "Test@123", companytype_1.CompanyType.PRIVATE);
+var corporate = new corporate_1.Corporate(autogenerator_1.AutoGenerator.generateAccountNo(10000000, 1000), new name_1.Name("VHEBANDCO", "Software Consulting Services", ""), new address_1.Address("10d", "First Street", "Avadi", "TN"), 9952032863, "vhebcompany@gmail.com", "Test@123", companytype_1.CompanyType.PRIVATE);
 console.log(corporate);
 //runtime polymorphism
 var customerObj = individual;
