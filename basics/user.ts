@@ -1,11 +1,11 @@
+import {Gender} from "../models/gender";
+
 let firstName:string="Parameswari";
 let lastName:string=null;
 let mobileNo:number=9952032862;
 let active:boolean=true;
 let roles:string[]=["analyst","manager"]
-enum Gender{
-    MALE,FEMALE,TRANSGENDER
-}
+
 let gender:Gender=Gender.FEMALE
 
 let userObject:object={
