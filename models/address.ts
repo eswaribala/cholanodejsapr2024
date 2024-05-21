@@ -1,4 +1,4 @@
-class Address{
+export class Address{
     private _doorNo:string;
     private _streetName:string;
     private _city:string;
