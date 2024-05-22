@@ -9,8 +9,10 @@ import {DeleteCustomerDto} from "./dto/delete-customer.dto";
 @Injectable()
 export class CustomerService {
 //dependency injecttion
-constructor(@InjectModel(Customer.name)private readonly customerModel:Model<CustomerDocument>) {
-}
+  constructor(
+      @InjectModel(Customer.name) private readonly customerModel: Model<CustomerDocument>,
+
+  ) {}
 
 
   async create(createCustomerDto: CreateCustomerDto) {
