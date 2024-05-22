@@ -1,23 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import {Customer, CustomerDocument} from "./entities/customer.entity";
+import {Model} from "mongoose";
+import {InjectModel} from "@nestjs/mongoose";
 
 @Injectable()
 export class CustomerService {
-  create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+//dependency injecttion
+constructor(@InjectModel(Customer.name)private readonly customerModel:Model<CustomerDocument>) {
+}
+
+
+  async create(createCustomerDto: CreateCustomerDto) {
+    return await new this.customerModel({
+      ...createCustomerDto,
+      createdAt: new Date(),
+    }).save();
   }
 
-  findAll() {
-    return `This action returns all customer`;
+  async findAll() {
+    return await this.customerModel.find().exec()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async findOne(mobileNo: number) {
+    return await this.customerModel.findOne({mobileNo:mobileNo}).exec()
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(updateCustomerDto: UpdateCustomerDto) {
+    return await this.customerModel.findByIdAndUpdate({mobileNo:updateCustomerDto.mobileNo},
+        {email:updateCustomerDto.email}).exec()
   }
 
   remove(id: number) {

@@ -2,10 +2,9 @@ import { PartialType } from '@nestjs/mapped-types';
 import { CreateCustomerDto } from './create-customer.dto';
 import {ApiProperty} from "@nestjs/swagger";
 
-export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {
+export class DeleteCustomerDto extends PartialType(CreateCustomerDto) {
+
     @ApiProperty()
-    email:string
-    @ApiProperty()
-    mobileNo:number
+    private mobileNo:number
 
 }
