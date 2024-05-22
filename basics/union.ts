@@ -23,13 +23,19 @@ let guess=(choice:customType):void=>{
     let object:any=null;
     switch (choice){
         case 'Individual':
-            object='selected individual'
+            object=individual
             break;
         case 'Corporate':
-            object='corporate'
+            object=new Corporate(AutoGenerator.generateAccountNo(10000000,1000),new Name("VHEBANDCO",
+                    "Software Consulting Services",""),new Address("10d","First Street",
+                    "Avadi","TN"),9952032863,"vhebcompany@gmail.com","Test@123",
+                CompanyType.PRIVATE);
+
             break;
         case 'Account':
-            object='account'
+            object=new SavingsAccount(2848732,
+                new Date(AutoGenerator.generateYear(2024,1970),
+                    12,1),individual,0.8)
             break;
 
     }
