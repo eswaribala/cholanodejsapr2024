@@ -18,26 +18,23 @@ let individual:Individual=new Individual(AutoGenerator.generateAccountNo(1000000
         "Avadi","TN"),9952032862,"param@gmail.com","Test@123",
     Gender.FEMALE,new Date(1970,12,2))
 console.log(individual)
-let guess=(choice:customType):object=>{
-    let object:Object=null;
+let guess=(choice:customType):void=>{
+    console.log(`choice=${choice}`)
+    let object:any=null;
     switch (choice){
         case 'Individual':
-            object=individual
-            break
+            object='selected individual'
+            break;
         case 'Corporate':
-            object=new Corporate(AutoGenerator.generateAccountNo(10000000,1000),new Name("VHEBANDCO",
-                    "Software Consulting Services",""),new Address("10d","First Street",
-                    "Avadi","TN"),9952032863,"vhebcompany@gmail.com","Test@123",
-                CompanyType.PRIVATE);
-            break
+            object='corporate'
+            break;
         case 'Account':
-            object=new SavingsAccount(2848732,
-                new Date(AutoGenerator.generateYear(2024,1970),
-                    12,1),individual,0.8)
-            break
+            object='account'
+            break;
 
     }
-    return object;
+    console.log(object);
+
 }
 
 guess(choices[value])
