@@ -4,6 +4,7 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 import {Customer, CustomerDocument} from "./entities/customer.entity";
 import {Model} from "mongoose";
 import {InjectModel} from "@nestjs/mongoose";
+import {DeleteCustomerDto} from "./dto/delete-customer.dto";
 
 @Injectable()
 export class CustomerService {
@@ -32,7 +33,7 @@ constructor(@InjectModel(Customer.name)private readonly customerModel:Model<Cust
         {email:updateCustomerDto.email}).exec()
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  remove(deleteCustomerDto: DeleteCustomerDto) {
+    return this.customerModel.findOneAndDelete({mobileNo:deleteCustomerDto.mobileNo})
   }
 }

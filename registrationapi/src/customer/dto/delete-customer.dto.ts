@@ -5,6 +5,10 @@ import {ApiProperty} from "@nestjs/swagger";
 export class DeleteCustomerDto extends PartialType(CreateCustomerDto) {
 
     @ApiProperty()
-    private mobileNo:number
+    private _mobileNo:number
 
+
+    get mobileNo(): number {
+        return this._mobileNo;
+    }
 }
