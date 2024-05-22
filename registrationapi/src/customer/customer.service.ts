@@ -31,7 +31,7 @@ export class CustomerService {
   }
 
   async update(updateCustomerDto: UpdateCustomerDto) {
-    return await this.customerModel.findByIdAndUpdate({mobileNo:updateCustomerDto.mobileNo},
+    return await this.customerModel.findOneAndUpdate({mobileNo:updateCustomerDto.mobileNo},
         {email:updateCustomerDto.email}).exec()
   }
 
