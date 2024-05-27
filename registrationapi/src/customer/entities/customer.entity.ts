@@ -16,7 +16,8 @@ export class Customer {
     private email:string
     @Prop({required:true})
     private mobileNo:number;
-
+    @Prop()
+    private createdAt:Date;
 
 }
 

@@ -4,16 +4,64 @@ import {ApiProperty} from "@nestjs/swagger";
 export class CreateCustomerDto {
 
     @ApiProperty()
-    private firstName:string;
+    private _firstName:string;
     @ApiProperty()
-    private lastName:string;
+    private _lastName:string;
     @ApiProperty()
-    private dob:Date;
+    private _dob:Date;
     @ApiProperty()
-    private gender:Gender;
+    private _gender:Gender;
     @ApiProperty()
-    private email:string
+    private _email:string
     @ApiProperty()
-    private mobileNo:number;
+    private _mobileNo:number;
 
+
+    get firstName(): string {
+        return this._firstName;
+    }
+
+    set firstName(value: string) {
+        this._firstName = value;
+    }
+
+    get lastName(): string {
+        return this._lastName;
+    }
+
+    set lastName(value: string) {
+        this._lastName = value;
+    }
+
+    get dob(): Date {
+        return this._dob;
+    }
+
+    set dob(value: Date) {
+        this._dob = value;
+    }
+
+    get gender(): Gender {
+        return this._gender;
+    }
+
+    set gender(value: Gender) {
+        this._gender = value;
+    }
+
+    get email(): string {
+        return this._email;
+    }
+
+    set email(value: string) {
+        this._email = value;
+    }
+
+    get mobileNo(): number {
+        return this._mobileNo;
+    }
+
+    set mobileNo(value: number) {
+        this._mobileNo = value;
+    }
 }
