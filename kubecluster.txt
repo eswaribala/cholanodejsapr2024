@@ -25,9 +25,14 @@ eksctl version
  eksctl create cluster --name my-cluster --region us-east-2 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 3 --managed
 Use the AWS CLI update-kubeconfig command to create or update your kubeconfig for your cluster.
 aws eks update-kubeconfig --name <cluster_name>
+aws eks update-kubeconfig --name my-cluster --region us-east-2
+
 
 Test your configuration:
 kubectl version
+To show kube config
+cat ~/.kube/config
+
 
 #check pod,svc and deploy
 kubectl get pods
